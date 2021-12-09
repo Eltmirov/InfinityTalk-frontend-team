@@ -1,4 +1,3 @@
-import { loadBooking } from './Booking';
 
 const initialState = {
   signingUp: false,
