@@ -16,7 +16,7 @@ const Header = () => {
           <NavLink to='/message' className={css.messages}> Сообщения  </NavLink>
       </div>
       <div className={css.profileBlock}>
-        <img src={Profile}/>
+        <img src={Profile}/> s
       </div>
 
     </div>
