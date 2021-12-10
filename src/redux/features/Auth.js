@@ -1,4 +1,3 @@
-
 const initialState = {
   signingUp: false,
   signingOut: false,

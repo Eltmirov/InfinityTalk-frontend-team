@@ -1,0 +1,41 @@
+
+
+.main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  margin-top: 30px;
+}
+
+.navbar {
+  margin-left: 100px;
+  display: flex;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+.findInterlocutor, .findTeacher, .messages {
+  margin-right: 35px;
+  width: 300px;
+  background-color: #E80038;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  line-height: 38px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+a {
+  color: #fff !important;
+  text-decoration: none
+}
+
+.profileBlock {
+  cursor: pointer;
+}
