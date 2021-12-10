@@ -26,3 +26,10 @@ h3{
   border: 3px solid;
   border-radius: 50px;
 }
+
+b{
+  font-family: Rozha One;
+  font-size: 18px;
+  margin-left: 65px;
+  margin-right: 35px;
+}
