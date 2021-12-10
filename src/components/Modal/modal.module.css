@@ -1,0 +1,30 @@
+.modalBtn {
+  background-color: white;
+  border: 0;
+  border-radius: 100%;
+}
+
+.modalBtn:hover {
+  background: white;
+}
+
+.profileIcon {
+  margin-left: 58px;
+}
+
+.editIcon {
+  margin-left: 250px;
+  width: 40px;
+}
+
+.userInfoBlock {
+  margin: 100px 0 0 30px;
+}
+
+.starIcon {
+  width: 40px;
+}
+
+.userInfoBlock span {
+  font-size: 35px;
+}

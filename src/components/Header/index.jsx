@@ -3,6 +3,7 @@ import css from './header.module.css'
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/images/Logo.png'
 import Profile from '../../assets/images/Profile.png'
+import ShowModal from '../Modal/Modal';
 
 const Header = () => {
   return (
@@ -16,7 +17,7 @@ const Header = () => {
           <NavLink to='/message' className={css.messages}> Сообщения  </NavLink>
       </div>
       <div className={css.profileBlock}>
-        <img src={Profile}/> s
+        <ShowModal/>
       </div>
 
     </div>
