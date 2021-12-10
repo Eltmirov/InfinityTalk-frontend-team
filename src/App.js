@@ -1,8 +1,8 @@
- import SignUpPage from './components/Pages/SignUpPage/SignUpPage';
+ import SignInPage from './components/Pages/SignInPage/SignInPage';
 
 function App() {
   return (
-    <SignUpPage/>
+    <SignInPage/>
   );
 }
 
