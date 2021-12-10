@@ -1,5 +1,3 @@
-// import { loadBooking } from './Booking';
-
 const initialState = {
   signingUp: false,
   signingOut: false,
