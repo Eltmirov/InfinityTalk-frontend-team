@@ -9,8 +9,8 @@ const SignInPage = () => {
         <img className={styles.miniLogo} src={miniLogo}/>
       </div>
       <h3>SIGN IN</h3>
-      <input className={styles.input} placeholder="Login..."/>
-      <input className={styles.input} placeholder="Password..."/>
+      <input className={styles.input} type="text" placeholder="Login..."/>
+      <input className={styles.input}  type="password" tplaceholder="Password..."/>
       <div>
         <button type="button" className={`btn btn-outline-danger ${styles.signIn}`}>SIGN IN</button>
       </div>
