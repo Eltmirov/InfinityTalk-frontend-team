@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FindInterlocutor = () => {
+const FindPartner = () => {
   return (
     <div>
         Страница "найти собеседника"
@@ -8,4 +8,4 @@ const FindInterlocutor = () => {
   );
 };
 
-export default FindInterlocutor;
+export default FindPartner;
