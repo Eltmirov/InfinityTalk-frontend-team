@@ -1,7 +1,7 @@
 import HomePage from './components/Pages/HomePage/HomePage';
 import { Route, Routes } from 'react-router-dom';
-import FindInterlocutorPage from './components/Pages/FindInterlocutorPage';
-import FindTeacherPage from './components/Pages/FindTeacherPage';
+import FindPartnerPage from './components/Pages/FindPartnerPage';
+import WebsitesPage from './components/Pages/WebsitesPage';
 import MessagePage from './components/Pages/MessagePage';
 import SignUpPage from './components/Pages/SignUpPage/SignUpPage';
 import SignInPage from './components/Pages/SignInPage/SignInPage';
