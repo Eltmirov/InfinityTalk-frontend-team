@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Modal } from 'react-bootstrap';
+import { Modal } from "react-bootstrap";
 import Profile from "../../assets/images/ProfileLogo.png";
 import ProfileIcon from "../../assets/images/profileIcon.png";
 import editIcon from "../../assets/images/edit-foto-image.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import css from "./modal.module.css";
+import UserInfo from "./profile";
 
 // import { useDispatch, useSelector } from "react-redux";
 // import EditModal from './EditModal';
 
-const user = [
-  {
-    name: "Hamzat",
-    email: "hamzat_intocode@mail.ru",
-  },
-];
-
 const ModalWindow = ({ name, ...props }) => {
-
   const [edit, setEdit] = useState(false);
 
-  const handleEdit = () =>  setEdit(true);
-  const handleEditClose = () => setEdit(false)
+  const [text, setText] = useState("");
+
+  const handleText = (e) => {
+    setText(e.target.value);
+  };
+
+  const handleEdit = () => setEdit(true);
+  const handleEditClose = () => setEdit(false);
 
   // const dispatch = useDispatch();
   // const user = useSelector(state => state.user);
@@ -50,21 +49,20 @@ const ModalWindow = ({ name, ...props }) => {
         <Offcanvas.Body>
           <div className={css.profileMain}>
             <div className={css.profileImg}>
-              <img src={ProfileIcon} className={css.image}/>
+              <img src={ProfileIcon} className={css.image} />
               <div>
                 <span
                   onClick={() => handleEdit(true)}
                   className={css.editButton}
                 >
                   <img src={editIcon} className={css.editIcon} />
-
                 </span>
               </div>
             </div>
           </div>
-          {edit &&
+          {edit ? (
             <Modal.Dialog>
-              <Modal.Header closeButton>
+              <Modal.Header>
                 <Modal.Title>Редактирование профиля</Modal.Title>
               </Modal.Header>
 
@@ -73,25 +71,33 @@ const ModalWindow = ({ name, ...props }) => {
                   <Form.Label>Добавить аватар</Form.Label>
                   <Form.Control type="file" />
                 </Form.Group>
-                <input placeholder="Your name..."/>
-                <input placeholder="Your e-mail..."/>
+                <input
+                  className={css.changeField}
+                  placeholder="Change name..."
+                  value={text}
+                  type="text"
+                  onChange={handleText}
+                />
+                <input
+                  className={css.changeField}
+                  placeholder="Change e-mail..."
+                />
+                <input
+                  className={css.changeField}
+                  placeholder="your instagram..."
+                />
               </Modal.Body>
 
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleEditClose}>Close</Button>
-                <Button variant="primary">Save changes</Button>
+                <Button variant="secondary" onClick={handleEditClose}>
+                  Close
+                </Button>
+                <Button variant="primary">Save</Button>
               </Modal.Footer>
-            </Modal.Dialog>}
-
-          {user.map((item) => {
-            return (
-              <div className={css.userInfoBlock}>
-                <p className={css.userInfo}> {item.name} </p>
-                <p className={css.userInfo}> {item.email} </p>
-              </div>
-            );
-          })}
-
+            </Modal.Dialog>
+          ) : (
+            <UserInfo />
+          )}
         </Offcanvas.Body>
       </Offcanvas>
     </div>
