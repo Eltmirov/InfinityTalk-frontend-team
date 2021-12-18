@@ -6,6 +6,7 @@
 
 .profileImg {
   width: 10px;
+  position: relative;
 }
 
 .modalBtn:hover {
@@ -13,7 +14,7 @@
 }
 
 .profileMain {
-  margin-left: 58px;
+  margin-left: 45px;
   position: relative;
 }
 
@@ -32,7 +33,7 @@
 }
 
 .userInfoBlock {
-  margin: 100px 0 0 30px;
+  margin: 40px 0 0 30px;
   padding-left: 10px;
 }
 
@@ -40,16 +41,13 @@
   -webkit-box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
   -moz-box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
   box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
+  font-family: 'Creepster', serif;
   font-size: 20px;
   padding-left: 5px;
 }
 
 .starIcon {
   width: 40px;
-}
-
-.profileImg {
-  position: relative;
 }
 
 .profileModal{
@@ -62,7 +60,8 @@
 
 .image {
   width: 240px;
-  margin-left: 10px;
+  margin-left: 28px;
+  border-radius: 100%;
 }
 
 .changeField {
@@ -72,3 +71,85 @@
   border: 2px solid lightgrey;
 }
 
+.editAvatar {
+  cursor: pointer;
+}
+
+.editClick {
+  font-size: 14px;
+  position: relative;
+  margin-top: 50px;
+  margin-left: 40px;
+  color: grey;
+  cursor: pointer;
+}
+
+.editButton {
+  background: none;
+  border: none;
+}
+
+.editButton_dis {
+  background: none;
+  border: none;
+  color: white;
+}
+
+
+label.filebutton {
+  width:120px;
+  height:40px;
+  overflow:hidden;
+  position:relative;
+  background-color:#ccc;
+}
+
+label span input {
+  z-index: 999;
+  line-height: 0;
+  font-size: 50px;
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity = 0);
+  -ms-filter: "alpha(opacity=0)";
+  cursor: pointer;
+  _cursor: hand;
+  margin: 0;
+  padding:0;
+}
+
+.editBlockMain {
+  margin-top: 30px;
+}
+
+.inputBlock {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.editInput {
+  border: none;
+  -webkit-box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
+  -moz-box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
+  box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
+  margin-bottom: 17px;
+  margin-left: 45px;
+  width: 320px;
+  font-size: 20px;
+  padding-left: 5px;
+}
+
+.buttonsBlock {
+  margin-left: 45px;
+}
+
+.loadingBtn {
+  background-color: red;
+  border: none;
+  width: 100px;
+}
+
+.loadingBtn :hover {
+  background-color: white;
+}

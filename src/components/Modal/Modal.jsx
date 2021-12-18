@@ -1,41 +1,67 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Modal } from "react-bootstrap";
 import Profile from "../../assets/images/ProfileLogo.png";
-import ProfileIcon from "../../assets/images/profileIcon.png";
 import editIcon from "../../assets/images/edit-foto-image.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import css from "./modal.module.css";
 import UserInfo from "./profile";
-
-// import { useDispatch, useSelector } from "react-redux";
-// import EditModal from './EditModal';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchUserProfile,
+  uploadAvatar,
+} from "../../redux/features/ProfileReducer";
 
 const ModalWindow = ({ name, ...props }) => {
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
+
+  function simulateNetworkRequest() {
+    return new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+
+  function LoadingButton() {
+    const [isLoading, setLoading] = useState(false);
+
+    useEffect(() => {
+      if (isLoading) {
+        simulateNetworkRequest().then(() => {
+          setLoading(false);
+        });
+      }
+    }, [isLoading]);
+
+    const handleClick = () => setLoading(true);
+
+    return (
+      <Button
+        variant="primary"
+        disabled={isLoading}
+        onClick={!isLoading ? handleClick : null}
+        className={css.loadingBtn}>
+        {isLoading ? "Loading…" : "Edit"}
+      </Button>
+    );
+  }
+
   const [edit, setEdit] = useState(false);
-
-  const [text, setText] = useState("");
-
-  const handleText = (e) => {
-    setText(e.target.value);
-  };
+  const [show, setShow] = useState(false);
+  const [file, setFile] = useState(null);
 
   const handleEdit = () => setEdit(true);
   const handleEditClose = () => setEdit(false);
 
-  // const dispatch = useDispatch();
-  // const user = useSelector(state => state.user);
-
-  /* заготовка для вывода с бэка.  Названия переменных не окончательны,  просто обозначил их. */
-
-  // useEffect(() => {
-  //   dispatch(loadUserInfo)
-  // }, [dispatch]);
-
-  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleChangeImage = (e) => {
+    setFile(e.target.files[0]);
+    dispatch(uploadAvatar(e.target.files[0]));
+  };
 
   return (
     <div>
@@ -49,55 +75,61 @@ const ModalWindow = ({ name, ...props }) => {
         <Offcanvas.Body>
           <div className={css.profileMain}>
             <div className={css.profileImg}>
-              <img src={ProfileIcon} className={css.image} />
-              <div>
-                <span
-                  onClick={() => handleEdit(true)}
-                  className={css.editButton}
-                >
-                  <img src={editIcon} className={css.editIcon} />
-                </span>
+              <img
+                src={`http://localhost:4000/${user.img}`}
+                className={css.image}
+              />
+              <div className={css.editAvatar}>
+                <label className="filebutton">
+                  <span>
+                    <input
+                      className="form-control"
+                      type="file"
+                      id="formFile"
+                      accept="image/*"
+                      onChange={handleChangeImage}
+                      name="img"
+                    />
+                    <img src={editIcon} className={css.editIcon} />
+                  </span>
+                </label>
               </div>
             </div>
           </div>
           {edit ? (
-            <Modal.Dialog>
-              <Modal.Header>
-                <Modal.Title>Редактирование профиля</Modal.Title>
-              </Modal.Header>
-
-              <Modal.Body>
-                <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>Добавить аватар</Form.Label>
-                  <Form.Control type="file" />
-                </Form.Group>
+            <div className={css.editBlockMain}>
+              <div className={css.inputBlock}>
                 <input
-                  className={css.changeField}
-                  placeholder="Change name..."
-                  value={text}
                   type="text"
-                  onChange={handleText}
+                  className={css.editInput}
+                  placeholder="name..."
                 />
                 <input
-                  className={css.changeField}
-                  placeholder="Change e-mail..."
+                  type="text"
+                  className={css.editInput}
+                  placeholder="surname..."
                 />
-                <input
-                  className={css.changeField}
-                  placeholder="your instagram..."
-                />
-              </Modal.Body>
-
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleEditClose}>
+              </div>
+              <div className={css.buttonsBlock}>
+                <Button variant="primary" onClick={handleEditClose}>
                   Close
-                </Button>
-                <Button variant="primary">Save</Button>
-              </Modal.Footer>
-            </Modal.Dialog>
+                </Button>{" "}
+                <LoadingButton />
+              </div>
+            </div>
           ) : (
             <UserInfo />
           )}
+          <div className={css.editClick}>
+            <button
+              onClick={() => handleEdit(true)}
+              disabled={edit}
+              className={edit ? css.editButton_dis : css.editButton}
+            >
+              {" "}
+              Редактировать{" "}
+            </button>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
     </div>

@@ -15,10 +15,9 @@ const UserInfo = () => {
   return (
     <div>
           <div className={css.userInfoBlock}>
-              <p className={css.userInfo}> {user.name} </p>
-              <p className={css.userInfo}> {user.email} </p>
+              <p className={css.userInfo}> Имя:   {user.name}</p>
+              <p className={css.userInfo}> E-mail: {user.email}</p>
           </div>
-
     </div>
   );
 };

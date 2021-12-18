@@ -1,16 +1,23 @@
 const initialState = {
   user: [],
   token: null,
-  loading: false
-}
+  loading: false,
+};
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "users/profile/fetch/fulfilled":
       return {
         ...state,
-        loading: false,
         user: action.payload,
+      };
+    case "users/profile/image/fulfilled":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          img: action.payload,
+        },
       };
     default:
       return state;
@@ -18,19 +25,36 @@ export const userReducer = (state = initialState, action) => {
 };
 
 export const fetchUserProfile = () => {
-  return async (dispatch) => {
-    try {
-      const response = await fetch(`http://localhost:4000/users/profile`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
+  return (dispatch) => {
+    fetch(`http://localhost:4000/users/profile`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "users/profile/fetch/fulfilled", payload: data });
       });
-      const json = await response.json();
-      dispatch({ type: "users/profile/fetch/fulfilled", payload: json });
-    } catch (e) {
-      //
-    }
+  };
+};
 
+export const uploadAvatar = (file) => {
+  return (dispatch) => {
+    const formData = new FormData();
+    formData.append("img", file);
+
+    fetch("http://localhost:4000/users/updateImg", {
+      method: "PATCH",
+      headers: {
+        // "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "users/profile/image/fulfilled", payload: data });
+      });
   };
 };
