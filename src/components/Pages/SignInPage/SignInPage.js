@@ -43,7 +43,7 @@ const SignInPage = () => {
       <input
         className={styles.input}
         type='password'
-        tplaceholder='Password...'
+        placeholder='Password...'
         value={password}
         onChange={handleChangePassword}
       />

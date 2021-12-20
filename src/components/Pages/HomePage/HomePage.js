@@ -4,7 +4,7 @@ import logoHome from '../../../assets/logo.png';
 import slogan from '../../../assets/slogan.png';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import FindInterlocutor from '../../FindInterlocutor ';
+import FindInterlocutor from '../FindPartnerPage';
 
 const HomePage = () => {
   let navigate = useNavigate();
