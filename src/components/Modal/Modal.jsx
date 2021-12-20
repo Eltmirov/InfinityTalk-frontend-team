@@ -52,7 +52,7 @@ const ModalWindow = ({ name, ...props }) => {
 
   return (
     <div>
-      <Button variant='primary' onClick={handleShow} className={css.modalBtn}>
+      <Button variant="primary" onClick={handleShow} className={css.modalBtn}>
         <img src={Profile} className={css.profileModal} />
       </Button>
       <Offcanvas show={show} onHide={handleClose} {...props}>
