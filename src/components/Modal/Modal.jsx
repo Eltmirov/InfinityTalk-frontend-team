@@ -67,7 +67,7 @@ const ModalWindow = ({ name, ...props }) => {
                 className={css.image}
               />
               <div className={css.editAvatar}>
-                <label className="filebutton">
+                <label className='filebutton'>
                   <span>
                     <input
                       className="form-control"
