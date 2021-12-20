@@ -4,7 +4,7 @@ import logoHome from '../../../assets/logo.png';
 import slogan from '../../../assets/slogan.png';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import FindInterlocutor from '../../FindInterlocutor ';
+import FindPartnerPage from "../FindPartnerPage";
 
 const HomePage = () => {
   let navigate = useNavigate();
@@ -13,7 +13,7 @@ const HomePage = () => {
   return (
     <>
       {token ? (
-        <FindInterlocutor />
+        <FindPartnerPage />
       ) : (
         <div className={styles.main}>
           <div className={styles.imgDiv}>
