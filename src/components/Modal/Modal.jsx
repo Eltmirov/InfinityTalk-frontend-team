@@ -1,42 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Modal } from 'react-bootstrap';
 import Profile from "../../assets/images/ProfileLogo.png";
-import ProfileIcon from "../../assets/images/profileIcon.png";
 import editIcon from "../../assets/images/edit-foto-image.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import css from "./modal.module.css";
-
-// import { useDispatch, useSelector } from "react-redux";
-// import EditModal from './EditModal';
-
-const user = [
-  {
-    name: "Hamzat",
-    email: "hamzat_intocode@mail.ru",
-  },
-];
+// import UserInfo from "./profile";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  editUserProfile,
+  fetchUserProfile,
+  uploadAvatar,
+} from "../../redux/features/ProfileReducer";
 
 const ModalWindow = ({ name, ...props }) => {
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
 
   const [edit, setEdit] = useState(false);
-
-  const handleEdit = () =>  setEdit(true);
-  const handleEditClose = () => setEdit(false)
-
-  // const dispatch = useDispatch();
-  // const user = useSelector(state => state.user);
-
-  /* заготовка для вывода с бэка.  Названия переменных не окончательны,  просто обозначил их. */
-
-  // useEffect(() => {
-  //   dispatch(loadUserInfo)
-  // }, [dispatch]);
-
   const [show, setShow] = useState(false);
+  const [file, setFile] = useState(null);
+  const [userNameEditText, setUserNameEditText] = useState("");
+  const [userEmailEditText, setUserEmailEditText] = useState("");
+  const [userSurnameEditText, setUserSurnameEditText] = useState("");
+
+  const handleEdit = () => setEdit(true);
+  const handleEditClose = () => setEdit(false);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleChangeImage = (e) => {
+    setFile(e.target.files[0]);
+    dispatch(uploadAvatar(e.target.files[0]));
+  };
+
+  const handleChangeNameInput = (e) => {
+    setUserNameEditText(e.target.value);
+  };
+
+  const handleChangeEmailInput = (e) => {
+    setUserEmailEditText(e.target.value);
+  };
+
+  const handleChangeSurnameInput = (e) => {
+    setUserSurnameEditText(e.target.value)
+  }
 
   return (
     <div>
@@ -50,53 +63,120 @@ const ModalWindow = ({ name, ...props }) => {
         <Offcanvas.Body>
           <div className={css.profileMain}>
             <div className={css.profileImg}>
-              <img src={ProfileIcon} className={css.image}/>
-              <div>
-                <span
-                  onClick={() => handleEdit(true)}
-                  className={css.editButton}
-                >
-                  <img src={editIcon} className={css.editIcon} />
-
-                </span>
+              <img
+                src={`http://localhost:4000/${user.img}`}
+                className={css.image}
+              />
+              <div className={css.editAvatar}>
+                <label className="filebutton">
+                  <span>
+                    <input
+                      className="form-control"
+                      type="file"
+                      id="formFile"
+                      accept="image/*"
+                      onChange={handleChangeImage}
+                      name="img"
+                    />
+                    <img src={editIcon} className={css.editIcon} />
+                  </span>
+                </label>
               </div>
             </div>
           </div>
-          {edit &&
-            <Modal.Dialog>
-              <Modal.Header closeButton>
-                <Modal.Title>Редактирование профиля</Modal.Title>
-              </Modal.Header>
-
-              <Modal.Body>
-                <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>Добавить аватар</Form.Label>
-                  <Form.Control type="file" />
-                </Form.Group>
-                <input placeholder="Your name..."/>
-                <input placeholder="Your e-mail..."/>
-              </Modal.Body>
-
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleEditClose}>Close</Button>
-                <Button variant="primary">Save changes</Button>
-              </Modal.Footer>
-            </Modal.Dialog>}
-
-          {user.map((item) => {
-            return (
-              <div className={css.userInfoBlock}>
-                <p className={css.userInfo}> {item.name} </p>
-                <p className={css.userInfo}> {item.email} </p>
+          {edit ? (
+            <div className={css.editBlockMain}>
+              <div className={css.inputBlock}>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  placeholder="name..."
+                  value={!userNameEditText ? user.name : userNameEditText}
+                  onChange={handleChangeNameInput}
+                />
+                <input
+                  type="text"
+                  className={css.editInput}
+                  placeholder="surname..."
+                  value={!userSurnameEditText ? user.surname : userSurnameEditText}
+                  onChange={handleChangeSurnameInput}
+                />
+                <input
+                  type="text"
+                  className={css.editInput}
+                  placeholder="surname..."
+                  value={!userEmailEditText ? user.email : userEmailEditText}
+                  onChange={handleChangeEmailInput}
+                />
               </div>
-            );
-          })}
-
+              <div className={css.buttonsBlock}>
+                <Button variant="primary" onClick={handleEditClose}>
+                  Close
+                </Button>{" "}
+                <LoadingButton
+                  name={userNameEditText}
+                  email={userEmailEditText}
+                />
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className={css.userInfoBlock}>
+                <p className={css.userInfo}> <span> Имя: </span>  {user.name}</p>
+                <p className={css.userInfo}> <span> Фамилия: </span> {user.surname}</p>
+                <p className={css.userInfo}> <span> E-mail: </span> {user.email} </p>
+              </div>
+            </div>
+          )}
+          <div className={css.editClick}>
+            <button
+              onClick={() => handleEdit(true)}
+              disabled={edit}
+              className={edit ? css.editButton_dis : css.editButton}
+            >
+              {" "}
+              Редактировать{" "}
+            </button>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
     </div>
   );
 };
+
+function LoadingButton({ name, email }) {
+  const [isLoading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  function simulateNetworkRequest() {
+    return new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+
+  useEffect(() => {
+    if (isLoading) {
+      simulateNetworkRequest().then(() => {
+        setLoading(false);
+      });
+    }
+  }, [isLoading]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(editUserProfile(name, email));
+    setLoading(true);
+  };
+
+  return (
+    <Button
+      variant="primary"
+      disabled={isLoading}
+      onClick={!isLoading ? handleClick : null}
+      className={css.loadingBtn}
+    >
+      {isLoading ? "Loading…" : "Edit"}
+    </Button>
+  );
+}
 
 function ShowModal() {
   return (
