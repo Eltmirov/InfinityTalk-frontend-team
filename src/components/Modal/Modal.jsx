@@ -5,7 +5,6 @@ import Profile from "../../assets/images/ProfileLogo.png";
 import editIcon from "../../assets/images/edit-foto-image.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import css from "./modal.module.css";
-// import UserInfo from "./profile";
 import { useDispatch, useSelector } from "react-redux";
 import {
   editUserProfile,
@@ -104,7 +103,7 @@ const ModalWindow = ({ name, ...props }) => {
                 <input
                   type="text"
                   className={css.editInput}
-                  placeholder="surname..."
+                  placeholder="email..."
                   value={!userEmailEditText ? user.email : userEmailEditText}
                   onChange={handleChangeEmailInput}
                 />
@@ -144,7 +143,7 @@ const ModalWindow = ({ name, ...props }) => {
   );
 };
 
-function LoadingButton({ name, email }) {
+function LoadingButton({ name, surname, email }) {
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -162,7 +161,7 @@ function LoadingButton({ name, email }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(editUserProfile(name, email));
+    dispatch(editUserProfile(name, surname, email));
     setLoading(true);
   };
 
