@@ -4,7 +4,7 @@ const initialState = {
   loading: false,
 };
 
-export const userReducer = (state = initialState, action) => {
+export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case "users/profile/fetch/fulfilled":
       return {
