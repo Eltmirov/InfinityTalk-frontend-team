@@ -10,11 +10,9 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<HomePage/>} />
-			<Route path='/signUp' element={<SignUpPage/>} />
-			<Route path='/signIn' element={<SignInPage/>} />
-      <Route path='/interlocutor' element={<FindInterlocutorPage/>} />
-      <Route path='/teacher' element={<FindTeacherPage/>} />
-      <Route path='/message' element={<MessagePage/>} />
+      <Route path='/signUp' element={<SignUpPage/>} />
+      <Route path='/signIn' element={<SignInPage/>} />
+      <Route path='/partners' element={<FindPartnerPage/>} />
     </Routes>
   );
 }
