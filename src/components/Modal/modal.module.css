@@ -19,6 +19,8 @@
 }
 
 .ProfileIcon {
+  width: 100px;
+  height: 80px;
   border-radius: 100%;
 }
 
@@ -38,9 +40,7 @@
 }
 
 .userInfo {
-  -webkit-box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
-  -moz-box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
-  box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
+  border-bottom: 1px solid lightgrey;
   font-family: 'Creepster', serif;
   font-size: 20px;
   padding-left: 5px;
@@ -130,14 +130,13 @@ label span input {
 
 .editInput {
   border: none;
-  -webkit-box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
-  -moz-box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
-  box-shadow: 0px -5px 5px -5px rgba(112, 159, 221, 0.6) inset;
+  border-bottom: 1px solid lightgrey;
   margin-bottom: 17px;
   margin-left: 45px;
   width: 320px;
   font-size: 20px;
   padding-left: 5px;
+  font-family: 'Creepster', serif;
 }
 
 .buttonsBlock {

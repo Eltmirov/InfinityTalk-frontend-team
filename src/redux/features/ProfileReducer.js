@@ -19,6 +19,11 @@ export const userReducer = (state = initialState, action) => {
           img: action.payload,
         },
       };
+    case "user/profile/edit/fulfilled":
+      return {
+        ...state,
+        user: action.payload
+      }
     default:
       return state;
   }
@@ -26,7 +31,7 @@ export const userReducer = (state = initialState, action) => {
 
 export const fetchUserProfile = () => {
   return (dispatch) => {
-    fetch(`http://localhost:4000/users/profile`, {
+    fetch(`http://localhost:5400/users/profile`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -44,7 +49,7 @@ export const uploadAvatar = (file) => {
     const formData = new FormData();
     formData.append("img", file);
 
-    fetch("http://localhost:4000/users/updateImg", {
+    fetch("http://localhost:5400/users/updateImg", {
       method: "PATCH",
       headers: {
         // "Content-type": "application/json",
@@ -58,3 +63,26 @@ export const uploadAvatar = (file) => {
       });
   };
 };
+
+export const editUserProfile = (name, surname, email) => {
+  const userInfo = {
+    name,
+    surname,
+    email,
+  };
+
+  return (dispatch) => {
+    fetch("http://localhost:5400/users/edit", {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(userInfo),
+    })
+    .then((res)  => res.json())
+    .then((data) => {
+      dispatch({type: "user/profile/edit/fulfilled", payload: data})
+    })
+  }
+}

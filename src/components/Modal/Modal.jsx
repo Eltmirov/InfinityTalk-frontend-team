@@ -5,9 +5,10 @@ import Profile from "../../assets/images/ProfileLogo.png";
 import editIcon from "../../assets/images/edit-foto-image.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import css from "./modal.module.css";
-import UserInfo from "./profile";
+// import UserInfo from "./profile";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  editUserProfile,
   fetchUserProfile,
   uploadAvatar,
 } from "../../redux/features/ProfileReducer";
@@ -20,37 +21,12 @@ const ModalWindow = ({ name, ...props }) => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
 
-  function simulateNetworkRequest() {
-    return new Promise((resolve) => setTimeout(resolve, 2000));
-  }
-
-  function LoadingButton() {
-    const [isLoading, setLoading] = useState(false);
-
-    useEffect(() => {
-      if (isLoading) {
-        simulateNetworkRequest().then(() => {
-          setLoading(false);
-        });
-      }
-    }, [isLoading]);
-
-    const handleClick = () => setLoading(true);
-
-    return (
-      <Button
-        variant="primary"
-        disabled={isLoading}
-        onClick={!isLoading ? handleClick : null}
-        className={css.loadingBtn}>
-        {isLoading ? "Loading…" : "Edit"}
-      </Button>
-    );
-  }
-
   const [edit, setEdit] = useState(false);
   const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
+  const [userNameEditText, setUserNameEditText] = useState("");
+  const [userEmailEditText, setUserEmailEditText] = useState("");
+  const [userSurnameEditText, setUserSurnameEditText] = useState("");
 
   const handleEdit = () => setEdit(true);
   const handleEditClose = () => setEdit(false);
@@ -62,6 +38,18 @@ const ModalWindow = ({ name, ...props }) => {
     setFile(e.target.files[0]);
     dispatch(uploadAvatar(e.target.files[0]));
   };
+
+  const handleChangeNameInput = (e) => {
+    setUserNameEditText(e.target.value);
+  };
+
+  const handleChangeEmailInput = (e) => {
+    setUserEmailEditText(e.target.value);
+  };
+
+  const handleChangeSurnameInput = (e) => {
+    setUserSurnameEditText(e.target.value)
+  }
 
   return (
     <div>
@@ -103,22 +91,42 @@ const ModalWindow = ({ name, ...props }) => {
                   type="text"
                   className={css.editInput}
                   placeholder="name..."
+                  value={!userNameEditText ? user.name : userNameEditText}
+                  onChange={handleChangeNameInput}
                 />
                 <input
                   type="text"
                   className={css.editInput}
                   placeholder="surname..."
+                  value={!userSurnameEditText ? user.surname : userSurnameEditText}
+                  onChange={handleChangeSurnameInput}
+                />
+                <input
+                  type="text"
+                  className={css.editInput}
+                  placeholder="surname..."
+                  value={!userEmailEditText ? user.email : userEmailEditText}
+                  onChange={handleChangeEmailInput}
                 />
               </div>
               <div className={css.buttonsBlock}>
                 <Button variant="primary" onClick={handleEditClose}>
                   Close
                 </Button>{" "}
-                <LoadingButton />
+                <LoadingButton
+                  name={userNameEditText}
+                  email={userEmailEditText}
+                />
               </div>
             </div>
           ) : (
-            <UserInfo />
+            <div>
+              <div className={css.userInfoBlock}>
+                <p className={css.userInfo}> <span> Имя: </span>  {user.name}</p>
+                <p className={css.userInfo}> <span> Фамилия: </span> {user.surname}</p>
+                <p className={css.userInfo}> <span> E-mail: </span> {user.email} </p>
+              </div>
+            </div>
           )}
           <div className={css.editClick}>
             <button
@@ -135,6 +143,40 @@ const ModalWindow = ({ name, ...props }) => {
     </div>
   );
 };
+
+function LoadingButton({ name, email }) {
+  const [isLoading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  function simulateNetworkRequest() {
+    return new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+
+  useEffect(() => {
+    if (isLoading) {
+      simulateNetworkRequest().then(() => {
+        setLoading(false);
+      });
+    }
+  }, [isLoading]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(editUserProfile(name, email));
+    setLoading(true);
+  };
+
+  return (
+    <Button
+      variant="primary"
+      disabled={isLoading}
+      onClick={!isLoading ? handleClick : null}
+      className={css.loadingBtn}
+    >
+      {isLoading ? "Loading…" : "Edit"}
+    </Button>
+  );
+}
 
 function ShowModal() {
   return (
