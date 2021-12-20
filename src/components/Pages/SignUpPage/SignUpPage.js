@@ -63,7 +63,7 @@ const SignUpPage = () => {
   return (
     <div className={styles.main}>
       <div>
-        <img className={styles.miniLogo} src={miniLogo} />
+        <img className={styles.miniLogo} src={miniLogo}/>
       </div>
       <h3>SIGN UP</h3>
       <input

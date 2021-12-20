@@ -3,6 +3,9 @@ import { Button } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Profile from "../../assets/images/ProfileLogo.png";
 import editIcon from "../../assets/images/edit-foto-image.png";
+import InstaIcon from '../../assets/images/instagram.png';
+import TeleIcon from '../../assets/images/TeleIcon.png';
+import WhatsAppIcon from  '../../assets/images/whatsUpIcon.png';
 import "bootstrap/dist/css/bootstrap.min.css";
 import css from "./modal.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,9 +26,15 @@ const ModalWindow = ({ name, ...props }) => {
   const [edit, setEdit] = useState(false);
   const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
-  const [userNameEditText, setUserNameEditText] = useState("");
-  const [userEmailEditText, setUserEmailEditText] = useState("");
+
+  const [userNameEditText, setUserNameEditText] = useState ("");
+  const [userEmailEditText, setUserEmailEditText] = useState ("");
   const [userSurnameEditText, setUserSurnameEditText] = useState("");
+  const [userWhatsUpEditText, setUserWhatsUpEditText] = useState ("");
+  const [userTelegramEditText, setUserTelegramEditText] = useState ("");
+  const [userInstagramEditText, setUserInstagramEditText] = useState ("");
+  const [userDescriptionEditText, setUserDescriptionEditText] = useState ("")
+
 
   const handleEdit = () => setEdit(true);
   const handleEditClose = () => setEdit(false);
@@ -47,7 +56,23 @@ const ModalWindow = ({ name, ...props }) => {
   };
 
   const handleChangeSurnameInput = (e) => {
-    setUserSurnameEditText(e.target.value)
+    setUserSurnameEditText(e.target.value);
+  };
+
+  const handleChangeInstagramInput = (e) => {
+    setUserInstagramEditText(e.target.value);
+  };
+
+  const handleChangeDescriptionInput = (e) => {
+    setUserDescriptionEditText(e.target.value)
+  }
+
+  const handleChangeTelegramInput = (e) => {
+    setUserTelegramEditText(e.target.value)
+  }
+
+  const handleChangeWhatsUpInput = (e) => {
+    setUserWhatsUpEditText(e.target.value)
   }
 
   return (
@@ -86,26 +111,55 @@ const ModalWindow = ({ name, ...props }) => {
           {edit ? (
             <div className={css.editBlockMain}>
               <div className={css.inputBlock}>
+                <span className={css.editTitle}>Имя:</span>
                 <input
                   type="text"
                   className={css.editInput}
-                  placeholder="name..."
                   value={!userNameEditText ? user.name : userNameEditText}
                   onChange={handleChangeNameInput}
                 />
+                <span className={css.editTitle}>Фамилия:</span>
                 <input
                   type="text"
                   className={css.editInput}
-                  placeholder="surname..."
-                  value={!userSurnameEditText ? user.surname : userSurnameEditText}
+                  value={
+                    !userSurnameEditText ? user.surname : userSurnameEditText
+                  }
                   onChange={handleChangeSurnameInput}
                 />
+                <span className={css.editTitle}>Е-майл:</span>
                 <input
                   type="text"
                   className={css.editInput}
-                  placeholder="email..."
                   value={!userEmailEditText ? user.email : userEmailEditText}
                   onChange={handleChangeEmailInput}
+                />
+                <span className={css.editTitle}>О себе: </span>
+                <textarea
+                  type="text"
+                  className={css.editInput}
+                  value={!userDescriptionEditText ? user.description : userDescriptionEditText}
+                  onChange={handleChangeDescriptionInput}/>
+                <span className={css.editTitle}>Инстаграм:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={!userInstagramEditText ? user.instagram : userInstagramEditText}
+                  onChange={handleChangeInstagramInput}
+                />
+                <span className={css.editTitle}>Телеграм:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={!userTelegramEditText ? user.telegram : userTelegramEditText}
+                  onChange={handleChangeTelegramInput}
+                />
+                <span className={css.editTitle}>Ватсап:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={!userWhatsUpEditText ? user.whatsapp : userWhatsUpEditText}
+                  onChange={handleChangeWhatsUpInput}
                 />
               </div>
               <div className={css.buttonsBlock}>
@@ -115,15 +169,44 @@ const ModalWindow = ({ name, ...props }) => {
                 <LoadingButton
                   name={userNameEditText}
                   email={userEmailEditText}
+                  surname={userSurnameEditText}
+                  whatsapp={userWhatsUpEditText}
+                  telegram={userTelegramEditText}
+                  instagram={userInstagramEditText}
+                  description={userDescriptionEditText}
                 />
               </div>
             </div>
           ) : (
             <div>
               <div className={css.userInfoBlock}>
-                <p className={css.userInfo}> <span> Имя: </span>  {user.name}</p>
-                <p className={css.userInfo}> <span> Фамилия: </span> {user.surname}</p>
-                <p className={css.userInfo}> <span> E-mail: </span> {user.email} </p>
+                <p className={css.userInfo}>
+                  {" "}
+                  <span> Имя: </span> {user.name}
+                </p>
+                <p className={css.userInfo}>
+                  {" "}
+                  <span> Фамилия: </span> {user.surname}
+                </p>
+                <p className={css.userInfo}>
+                  {" "}
+                  <span> E-mail: </span> {user.email}{" "}
+                </p>
+                <p className={css.userInfo}>
+                  {" "}
+                  <span> О себе: </span> {user.description}{" "}
+                </p>
+                <div className={css.socialNetworkIcons}>
+                {user.instagram ? (
+                    <a href={user.instagram}> <img src={InstaIcon} className={css.socialIcon}/>  </a>
+                ) : null}
+                {user.telegram ? (
+                    <a href={user.telegram}> <img src={TeleIcon} className={css.socialIcon}/>  </a>
+                ) : null}
+                  {user.whatsapp ? (
+                    <a href={user.whatsapp}> <img src={WhatsAppIcon} className={css.socialIcon}/>  </a>
+                  ) : null}
+                </div>
               </div>
             </div>
           )}
@@ -143,12 +226,12 @@ const ModalWindow = ({ name, ...props }) => {
   );
 };
 
-function LoadingButton({ name, surname, email }) {
+function LoadingButton({ name, surname, email, description, instagram, telegram, whatsapp}) {
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   function simulateNetworkRequest() {
-    return new Promise((resolve) => setTimeout(resolve, 2000));
+    return new Promise((resolve) => setTimeout(resolve, 1000));
   }
 
   useEffect(() => {
@@ -161,7 +244,7 @@ function LoadingButton({ name, surname, email }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(editUserProfile(name, surname, email));
+    dispatch(editUserProfile(name, surname, email, description, instagram, telegram, whatsapp));
     setLoading(true);
   };
 

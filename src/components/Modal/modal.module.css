@@ -152,3 +152,17 @@ label span input {
 .loadingBtn :hover {
   background-color: white;
 }
+
+.editTitle {
+  margin-left: 45px;
+  color: grey;
+}
+
+.socialNetworkIcons {
+  text-align: center;
+}
+
+.socialIcon {
+  width: 100px;
+  height: 100px;
+}

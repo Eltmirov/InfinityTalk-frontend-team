@@ -31,7 +31,7 @@ export const userReducer = (state = initialState, action) => {
 
 export const fetchUserProfile = () => {
   return (dispatch) => {
-    fetch(`http://localhost:4000/users/profile`, {
+    fetch('http://localhost:4000/users/profile', {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -64,11 +64,15 @@ export const uploadAvatar = (file) => {
   };
 };
 
-export const editUserProfile = (name, surname, email) => {
+export const editUserProfile = (name, surname, email, description, instagram, telegram, whatsapp) => {
   const userInfo = {
     name,
     surname,
     email,
+    description,
+    instagram,
+    telegram,
+    whatsapp
   };
 
   return (dispatch) => {
