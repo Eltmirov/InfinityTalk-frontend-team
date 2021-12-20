@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FindPartnerPage from '../FindPartnerPage';
 
+
 const HomePage = () => {
   let navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
