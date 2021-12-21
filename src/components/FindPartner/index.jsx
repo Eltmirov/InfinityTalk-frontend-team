@@ -4,8 +4,8 @@ import {useNavigate} from "react-router";
 import Cards from '../Cards';
 
 const FindPartner = () => {
-  const token = useSelector(state => state.auth.token)
-  let redirect = useNavigate()
+  const token = useSelector((state) => state.auth.token);
+  let redirect = useNavigate();
   return (
     <>
 			{!token &&(redirect('/'))}
