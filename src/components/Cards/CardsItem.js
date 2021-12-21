@@ -17,7 +17,9 @@ const CardsItem = ({
     <div className="mb-3">
       <div className="row g-0 justify-content-center">
         <div className="col-md-2 m-2 text-center">
-          <img className={`rounded-circle ${styles.img}`} src={img} alt="..." />
+          <img className={`rounded-circle ${styles.img}`}
+               src={img}
+               alt="..."/>
           <div className={styles.Link}>
             <Link to="/">SEND</Link>
           </div>
