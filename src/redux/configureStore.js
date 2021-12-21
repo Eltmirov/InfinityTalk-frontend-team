@@ -8,7 +8,7 @@ import { profileReducer } from './features/ProfileReducer';
 export const store = createStore(
   combineReducers({
     auth: authReducer,
-    user: profileReducer
+    userProfile: profileReducer
   }),
   composeWithDevTools(applyMiddleware(thunk, logger))
 );

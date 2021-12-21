@@ -16,16 +16,16 @@ import {
 } from "../../redux/features/ProfileReducer";
 
 const ModalWindow = ({ name, ...props }) => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.userProfile.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
 
+  const [file, setFile] = useState(null);
   const [edit, setEdit] = useState(false);
   const [show, setShow] = useState(false);
-  const [file, setFile] = useState(null);
 
   const [userNameEditText, setUserNameEditText] = useState ("");
   const [userEmailEditText, setUserEmailEditText] = useState ("");
@@ -35,12 +35,12 @@ const ModalWindow = ({ name, ...props }) => {
   const [userInstagramEditText, setUserInstagramEditText] = useState ("");
   const [userDescriptionEditText, setUserDescriptionEditText] = useState ("")
 
-
   const handleEdit = () => setEdit(true);
   const handleEditClose = () => setEdit(false);
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
 
   const handleChangeImage = (e) => {
     setFile(e.target.files[0]);
@@ -95,7 +95,7 @@ const ModalWindow = ({ name, ...props }) => {
                 <label className="filebutton">
                   <span>
                     <input
-                      className="form-control"
+                        className="form-control"
                       type="file"
                       id="formFile"
                       accept="image/*"
@@ -163,17 +163,17 @@ const ModalWindow = ({ name, ...props }) => {
                 />
               </div>
               <div className={css.buttonsBlock}>
-                <Button variant="primary" onClick={handleEditClose}>
-                  Close
+                <Button variant="primary" onClick={handleEditClose} className={css.closeButton}>
+                  Закрыть
                 </Button>{" "}
                 <LoadingButton
-                  name={userNameEditText}
-                  email={userEmailEditText}
-                  surname={userSurnameEditText}
-                  whatsapp={userWhatsUpEditText}
-                  telegram={userTelegramEditText}
-                  instagram={userInstagramEditText}
-                  description={userDescriptionEditText}
+                  name={!userNameEditText ? user.name : userNameEditText}
+                  email={!userEmailEditText ? user.email : userEmailEditText}
+                  surname={!userSurnameEditText ? user.surname : userSurnameEditText}
+                  whatsapp={!userWhatsUpEditText ? user.whatsapp : userWhatsUpEditText}
+                  telegram={!userTelegramEditText ? user.telegram : userTelegramEditText}
+                  instagram={!userInstagramEditText ? user.instagram : userInstagramEditText}
+                  description={!userDescriptionEditText ? user.description : userDescriptionEditText}
                 />
               </div>
             </div>
@@ -196,6 +196,7 @@ const ModalWindow = ({ name, ...props }) => {
                   {" "}
                   <span> О себе: </span> {user.description}{" "}
                 </p>
+                <hr/>
                 <div className={css.socialNetworkIcons}>
                 {user.instagram ? (
                     <a href={user.instagram}> <img src={InstaIcon} className={css.socialIcon}/>  </a>
@@ -219,6 +220,9 @@ const ModalWindow = ({ name, ...props }) => {
               {" "}
               Редактировать{" "}
             </button>
+            {edit ? (null) : (
+              <button className={css.exitButton}>Выход</button>
+            )}
           </div>
         </Offcanvas.Body>
       </Offcanvas>
@@ -255,7 +259,7 @@ function LoadingButton({ name, surname, email, description, instagram, telegram,
       onClick={!isLoading ? handleClick : null}
       className={css.loadingBtn}
     >
-      {isLoading ? "Loading…" : "Edit"}
+      {isLoading ? "Loading…" : "Сохранить"}
     </Button>
   );
 }
