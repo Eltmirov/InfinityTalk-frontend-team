@@ -9,12 +9,12 @@ import SignInPage from './components/Pages/SignInPage/SignInPage';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<HomePage/>} />
-			<Route path='/signUp' element={<SignUpPage/>} />
-			<Route path='/signIn' element={<SignInPage/>} />
-      <Route path='/partners' element={<FindPartnerPage/>} />
-      <Route path='/websites' element={<WebsitesPage/>} />
-      <Route path='/message' element={<MessagePage/>} />
+      <Route path='/' element={<HomePage />} />
+      <Route path='/signUp' element={<SignUpPage />} />
+      <Route path='/signIn' element={<SignInPage />} />
+      <Route path='/partners' element={<FindPartnerPage />} />
+      <Route path='/websites' element={<WebsitesPage />} />
+      <Route path='/message' element={<MessagePage />} />
     </Routes>
   );
 }

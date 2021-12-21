@@ -1,14 +1,14 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { authReducer } from "./features/Auth";
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { authReducer } from './features/Auth';
 import { logger } from 'redux-logger/src';
-import { profileReducer } from './features/ProfileReducer';
+import { userReducer } from './features/User';
 
 export const store = createStore(
   combineReducers({
     auth: authReducer,
-    user: profileReducer
+    user: userReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk, logger))
 );

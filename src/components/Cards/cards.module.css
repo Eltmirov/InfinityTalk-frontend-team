@@ -1,0 +1,35 @@
+.img{
+  width: 150px;
+  border: 2px solid grey;
+  text-align: center;
+}
+a{
+  color: white;
+  margin: 10px;
+  text-decoration-line: none;
+}
+a:hover{
+  color: white;
+}
+.Link{
+  border-radius: 5px;
+  margin-top: 15px;
+  text-align: center;
+  background-color: #E80038;
+  transition: 0.2s linear;
+}
+.Link:hover{
+  background-color: #cb0330;
+  color: white;
+}
+.textContent{
+  align-items: center;
+  font-family: Rozha One;
+  box-shadow: -6px -6px 4px rgba(137, 137, 137, 0.14);
+  border-radius: 10px;
+  width: 350px;
+}
+.ikon{
+  width: 30px;
+  height: 23px;
+}
