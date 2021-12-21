@@ -31,8 +31,8 @@ export const profileReducer = (state = initialState, action) => {
 
 export const fetchUserProfile = () => {
   return (dispatch) => {
-    fetch('http://localhost:4000/users/profile', {
-      method: 'GET',
+    fetch("http://localhost:4000/users/profile", {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
@@ -94,7 +94,7 @@ export const editUserProfile = (
     })
       .then((res) => res.json())
       .then((data) => {
-        dispatch({ type: 'user/profile/edit/fulfilled', payload: data });
+        dispatch({ type: "user/profile/edit/fulfilled", payload: data });
       });
   };
 };

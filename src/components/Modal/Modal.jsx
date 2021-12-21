@@ -3,9 +3,9 @@ import { Button } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Profile from "../../assets/images/ProfileLogo.png";
 import editIcon from "../../assets/images/edit-foto-image.png";
-import InstaIcon from '../../assets/images/instagram.png';
-import TeleIcon from '../../assets/images/TeleIcon.png';
-import WhatsAppIcon from  '../../assets/images/whatsUpIcon.png';
+import InstaIcon from "../../assets/images/instagram.png";
+import TeleIcon from "../../assets/images/TeleIcon.png";
+import WhatsAppIcon from "../../assets/images/whatsUpIcon.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import css from "./modal.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,7 @@ import {
 } from "../../redux/features/ProfileReducer";
 
 const ModalWindow = ({ name, ...props }) => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.userProfile.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,14 +27,13 @@ const ModalWindow = ({ name, ...props }) => {
   const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
 
-  const [userNameEditText, setUserNameEditText] = useState ("");
-  const [userEmailEditText, setUserEmailEditText] = useState ("");
+  const [userNameEditText, setUserNameEditText] = useState("");
+  const [userEmailEditText, setUserEmailEditText] = useState("");
   const [userSurnameEditText, setUserSurnameEditText] = useState("");
-  const [userWhatsUpEditText, setUserWhatsUpEditText] = useState ("");
-  const [userTelegramEditText, setUserTelegramEditText] = useState ("");
-  const [userInstagramEditText, setUserInstagramEditText] = useState ("");
-  const [userDescriptionEditText, setUserDescriptionEditText] = useState ("")
-
+  const [userWhatsUpEditText, setUserWhatsUpEditText] = useState("");
+  const [userTelegramEditText, setUserTelegramEditText] = useState("");
+  const [userInstagramEditText, setUserInstagramEditText] = useState("");
+  const [userDescriptionEditText, setUserDescriptionEditText] = useState("");
 
   const handleEdit = () => setEdit(true);
   const handleEditClose = () => setEdit(false);
@@ -64,16 +63,16 @@ const ModalWindow = ({ name, ...props }) => {
   };
 
   const handleChangeDescriptionInput = (e) => {
-    setUserDescriptionEditText(e.target.value)
-  }
+    setUserDescriptionEditText(e.target.value);
+  };
 
   const handleChangeTelegramInput = (e) => {
-    setUserTelegramEditText(e.target.value)
-  }
+    setUserTelegramEditText(e.target.value);
+  };
 
   const handleChangeWhatsUpInput = (e) => {
-    setUserWhatsUpEditText(e.target.value)
-  }
+    setUserWhatsUpEditText(e.target.value);
+  };
 
   return (
     <div>
@@ -138,27 +137,40 @@ const ModalWindow = ({ name, ...props }) => {
                 <textarea
                   type="text"
                   className={css.editInput}
-                  value={!userDescriptionEditText ? user.description : userDescriptionEditText}
-                  onChange={handleChangeDescriptionInput}/>
+                  value={
+                    !userDescriptionEditText
+                      ? user.description
+                      : userDescriptionEditText
+                  }
+                  onChange={handleChangeDescriptionInput}
+                />
                 <span className={css.editTitle}>Инстаграм:</span>
                 <input
                   type="text"
                   className={css.editInput}
-                  value={!userInstagramEditText ? user.instagram : userInstagramEditText}
+                  value={
+                    !userInstagramEditText
+                      ? user.instagram
+                      : userInstagramEditText
+                  }
                   onChange={handleChangeInstagramInput}
                 />
                 <span className={css.editTitle}>Телеграм:</span>
                 <input
                   type="text"
                   className={css.editInput}
-                  value={!userTelegramEditText ? user.telegram : userTelegramEditText}
+                  value={
+                    !userTelegramEditText ? user.telegram : userTelegramEditText
+                  }
                   onChange={handleChangeTelegramInput}
                 />
                 <span className={css.editTitle}>Ватсап:</span>
                 <input
                   type="text"
                   className={css.editInput}
-                  value={!userWhatsUpEditText ? user.whatsapp : userWhatsUpEditText}
+                  value={
+                    !userWhatsUpEditText ? user.whatsapp : userWhatsUpEditText
+                  }
                   onChange={handleChangeWhatsUpInput}
                 />
               </div>
@@ -197,14 +209,23 @@ const ModalWindow = ({ name, ...props }) => {
                   <span> О себе: </span> {user.description}{" "}
                 </p>
                 <div className={css.socialNetworkIcons}>
-                {user.instagram ? (
-                    <a href={user.instagram}> <img src={InstaIcon} className={css.socialIcon}/>  </a>
-                ) : null}
-                {user.telegram ? (
-                    <a href={user.telegram}> <img src={TeleIcon} className={css.socialIcon}/>  </a>
-                ) : null}
+                  {user.instagram ? (
+                    <a href={user.instagram}>
+                      {" "}
+                      <img src={InstaIcon} className={css.socialIcon} />{" "}
+                    </a>
+                  ) : null}
+                  {user.telegram ? (
+                    <a href={user.telegram}>
+                      {" "}
+                      <img src={TeleIcon} className={css.socialIcon} />{" "}
+                    </a>
+                  ) : null}
                   {user.whatsapp ? (
-                    <a href={user.whatsapp}> <img src={WhatsAppIcon} className={css.socialIcon}/>  </a>
+                    <a href={user.whatsapp}>
+                      {" "}
+                      <img src={WhatsAppIcon} className={css.socialIcon} />{" "}
+                    </a>
                   ) : null}
                 </div>
               </div>
@@ -226,7 +247,15 @@ const ModalWindow = ({ name, ...props }) => {
   );
 };
 
-function LoadingButton({ name, surname, email, description, instagram, telegram, whatsapp}) {
+function LoadingButton({
+  name,
+  surname,
+  email,
+  description,
+  instagram,
+  telegram,
+  whatsapp,
+}) {
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -244,7 +273,17 @@ function LoadingButton({ name, surname, email, description, instagram, telegram,
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(editUserProfile(name, surname, email, description, instagram, telegram, whatsapp));
+    dispatch(
+      editUserProfile(
+        name,
+        surname,
+        email,
+        description,
+        instagram,
+        telegram,
+        whatsapp
+      )
+    );
     setLoading(true);
   };
 
