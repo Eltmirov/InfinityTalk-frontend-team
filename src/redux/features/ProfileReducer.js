@@ -31,7 +31,7 @@ export const userReducer = (state = initialState, action) => {
 
 export const fetchUserProfile = () => {
   return (dispatch) => {
-    fetch(`http://localhost:5400/users/profile`, {
+    fetch(`http://localhost:4000/users/profile`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +49,7 @@ export const uploadAvatar = (file) => {
     const formData = new FormData();
     formData.append("img", file);
 
-    fetch("http://localhost:5400/users/updateImg", {
+    fetch("http://localhost:4000/users/updateImg", {
       method: "PATCH",
       headers: {
         // "Content-type": "application/json",
@@ -72,7 +72,7 @@ export const editUserProfile = (name, surname, email) => {
   };
 
   return (dispatch) => {
-    fetch("http://localhost:5400/users/edit", {
+    fetch("http://localhost:4000/users/edit", {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
