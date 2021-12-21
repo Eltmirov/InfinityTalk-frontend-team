@@ -16,7 +16,7 @@ import {
 } from "../../redux/features/ProfileReducer";
 
 const ModalWindow = ({ name, ...props }) => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.profile.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -74,7 +74,6 @@ const ModalWindow = ({ name, ...props }) => {
   const handleChangeWhatsUpInput = (e) => {
     setUserWhatsUpEditText(e.target.value)
   }
-
   return (
     <div>
       <Button variant="primary" onClick={handleShow} className={css.modalBtn}>
@@ -83,12 +82,13 @@ const ModalWindow = ({ name, ...props }) => {
       <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title></Offcanvas.Title>
+
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className={css.profileMain}>
             <div className={css.profileImg}>
               <img
-                src={`http://localhost:4000/${user.img}`}
+                  src={`http://localhost:4000/${user.img}`}
                 className={css.image}
               />
               <div className={css.editAvatar}>

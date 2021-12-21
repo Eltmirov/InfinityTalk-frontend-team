@@ -20,14 +20,13 @@ export const userReducer = (state = initialState, action) => {
 
 export const loadUsers = () => {
   return async (dispatch) => {
-    await dispatch({ type: "users/load/pending" });
-    await fetch("http://localhost:4000/users")
-      .then(async (res) => await res.json())
-      .then(async (users) => {
-        await dispatch({
-          type: "users/load/fulfilled",
-          payload: users,
-        });
-      });
+    dispatch({ type: "users/load/pending" });
+    const res = await fetch("http://localhost:4000/users");
+    const users = await res.json();
+    console.log(users, '----> lorem')
+    dispatch({
+      type: "users/load/fulfilled",
+      payload: users,
+    });
   };
 };
