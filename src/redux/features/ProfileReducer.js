@@ -5,12 +5,12 @@ const initialState = {
 
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "users/profile/fetch/fulfilled":
+    case 'users/profile/fetch/fulfilled':
       return {
         ...state,
         user: action.payload,
       };
-    case "users/profile/image/fulfilled":
+    case 'users/profile/image/fulfilled':
       return {
         ...state,
         user: {
@@ -18,7 +18,7 @@ export const profileReducer = (state = initialState, action) => {
           img: action.payload,
         },
       };
-    case "user/profile/edit/fulfilled":
+    case 'user/profile/edit/fulfilled':
       return {
         ...state.user,
         user: action.payload
@@ -30,15 +30,15 @@ export const profileReducer = (state = initialState, action) => {
 
 export const fetchUserProfile = () => {
   return (dispatch) => {
-    fetch('http://localhost:4000/users/profile', {
+    fetch("http://localhost:4000/users/profile", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        dispatch({ type: "users/profile/fetch/fulfilled", payload: data });
+        dispatch({ type: 'users/profile/fetch/fulfilled', payload: data });
       });
   };
 };
@@ -46,24 +46,32 @@ export const fetchUserProfile = () => {
 export const uploadAvatar = (file) => {
   return (dispatch) => {
     const formData = new FormData();
-    formData.append("img", file);
+    formData.append('img', file);
 
-    fetch("http://localhost:4000/users/updateImg", {
-      method: "PATCH",
+    fetch('http://localhost:4000/users/updateImg', {
+      method: 'PATCH',
       headers: {
         // "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: formData,
     })
       .then((res) => res.json())
       .then((data) => {
-        dispatch({ type: "users/profile/image/fulfilled", payload: data });
+        dispatch({ type: 'users/profile/image/fulfilled', payload: data });
       });
   };
 };
 
-export const editUserProfile = (name, surname, email, description, instagram, telegram, whatsapp) => {
+export const editUserProfile = (
+  name,
+  surname,
+  email,
+  description,
+  instagram,
+  telegram,
+  whatsapp
+) => {
   const userInfo = {
     name,
     surname,
@@ -71,21 +79,21 @@ export const editUserProfile = (name, surname, email, description, instagram, te
     description,
     instagram,
     telegram,
-    whatsapp
+    whatsapp,
   };
 
   return (dispatch) => {
-    fetch("http://localhost:4000/users/edit", {
-      method: "PATCH",
+    fetch('http://localhost:4000/users/edit', {
+      method: 'PATCH',
       headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify(userInfo),
     })
-    .then((res)  => res.json())
-    .then((data) => {
-      dispatch({type: "user/profile/edit/fulfilled", payload: data})
-    })
-  }
-}
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "user/profile/edit/fulfilled", payload: data });
+      });
+  };
+};

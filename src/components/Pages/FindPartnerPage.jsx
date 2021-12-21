@@ -1,23 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from '../Header';
 import FindPartner from '../FindPartner';
-import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
+
+
+// const FindPartnerPage = () => {
+//   let redirect = useNavigate()
+//   const token = useSelector((state) => state.auth.token);
+
+//   return(
+//     <>
+//       {token ?
+//         <div>
+//           <Header/>
+//           <FindPartner/>
+//         </div>
+//       :
+//         redirect('/')
+//       }
+// =======
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router";
 
 const FindPartnerPage = () => {
+  const token = useSelector(state => state.auth.token)
   let redirect = useNavigate()
-  const token = useSelector((state) => state.auth.token);
-
-  return(
+  return (
     <>
-      {token ?
-        <div>
-          <Header/>
-          <FindPartner/>
-        </div>
-      :
-        redirect('/')
-      }
+      {!token &&(redirect('/'))}
+      <div>
+        <Header/>
+        <FindPartner/>
+      </div>
     </>
   );
 };
