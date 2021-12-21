@@ -6,7 +6,6 @@ import { logger } from "redux-logger/src";
 import { userReducer } from "./features/User";
 import { profileReducer } from "./features/ProfileReducer";
 
-
 export const store = createStore(
   combineReducers({
     auth: authReducer,
