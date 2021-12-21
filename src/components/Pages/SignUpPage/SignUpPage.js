@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
-import styles from './signup.module.css';
-import miniLogo from '../../../assets/mini-logo.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { createUser } from '../../../redux/features/Auth';
+import React, { useState } from "react";
+import styles from "./signup.module.css";
+import miniLogo from "../../../assets/mini-logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from "../../../redux/features/Auth";
 import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const dispatch = useDispatch();
-	let navigate = useNavigate();
+  let navigate = useNavigate();
+
+  const Russian = "61c042c69dbc13d9692e46db";
+  const English = "61c042d19dbc13d9692e46dd";
+  const Spanish = "61c042d79dbc13d9692e46df";
+  const French = "61c042dd9dbc13d9692e46e1";
+  const Arabic = "61c042e29dbc13d9692e46e3";
+  const Deutsch = "61c042e79dbc13d9692e46e5";
 
   const successSingUp = useSelector((state) => state.auth.successSingUp);
-	const error = useSelector((state) => state.auth.error);
+  const error = useSelector((state) => state.auth.error);
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [defaultLanguage, setDefaultLanguage] = useState(Russian);
+  const [learnLanguage, setLearnLanguage] = useState(English);
 
   const handleChangeName = (ev) => {
     setName(ev.target.value);
@@ -34,42 +43,52 @@ const SignUpPage = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(createUser(name, email, login, password));
-    setName('');
-    setEmail('');
-    setLogin('');
-    setPassword('');
+    dispatch(
+      createUser(name, email, login, password, defaultLanguage, learnLanguage)
+    );
+    setName("");
+    setEmail("");
+    setLogin("");
+    setPassword("");
   };
+
+  const handleSelectDefault = (ev) => {
+    setDefaultLanguage(ev.target.value)
+  }
+
+  const handleSelectLearn = (ev) => {
+    setLearnLanguage(ev.target.value)
+  }
 
   return (
     <div className={styles.main}>
       <div>
-        <img className={styles.miniLogo} src={miniLogo} />
+        <img className={styles.miniLogo} src={miniLogo}/>
       </div>
       <h3>SIGN UP</h3>
       <input
         className={styles.input}
-        placeholder='Name...'
+        placeholder="Name..."
         value={name}
         onChange={handleChangeName}
       />
       <input
         className={styles.input}
-        placeholder='Email...'
+        placeholder="Email..."
         value={email}
         onChange={handleChangeEmail}
       />
       <br />
       <input
         className={styles.input}
-        placeholder='Login...'
+        placeholder="Login..."
         value={login}
         onChange={handleChangeLogin}
       />
       <input
         className={styles.input}
-        type='password'
-        placeholder='Password...'
+        type="password"
+        placeholder="Password..."
         value={password}
         onChange={handleChangePassword}
       />
@@ -78,32 +97,32 @@ const SignUpPage = () => {
         <b>I speak:</b>
         <b>I want to learn:</b>
       </div>
-      <select className={styles.input}>
-        <option value='Russian'>Russian</option>
-        <option value='English'>English</option>
-        <option value='Spanish'>Spanish</option>
-        <option value='French'>French</option>
-        <option value='Arabic'>Arabic</option>
-        <option value='Deutsch'>Deutsch</option>
+      <select value={defaultLanguage} onChange={handleSelectDefault} className={styles.input}>
+        <option value={Russian}>Russian</option>
+        <option value={English}>English</option>
+        <option value={Spanish}>Spanish</option>
+        <option value={French}>French</option>
+        <option value={Arabic}>Arabic</option>
+        <option value={Deutsch}>Deutsch</option>
       </select>
-      <select className={styles.input}>
-        <option value='English'>English</option>
-        <option value='Russian'>Russian</option>
-        <option value='Spanish'>Spanish</option>
-        <option value='French'>French</option>
-        <option value='Arabic'>Arabic</option>
-        <option value='Deutsch'>Deutsch</option>
+      <select value={learnLanguage} onChange={handleSelectLearn} className={styles.input}>
+        <option value={English}>English</option>
+        <option value={Russian}>Russian</option>
+        <option value={Spanish}>Spanish</option>
+        <option value={French}>French</option>
+        <option value={Arabic}>Arabic</option>
+        <option value={Deutsch}>Deutsch</option>
       </select>
-			<div>{error &&('Ошибка авторизации!')}</div>
+      <div>{error && "Ошибка авторизации!"}</div>
       <div>
         <button
-          type='button'
+          type="button"
           className={`btn btn-outline-success ${styles.signUp}`}
           onClick={handleSubmit}
         >
           SIGN UP
         </button>
-				{successSingUp && (navigate('/signIn'))}
+        {successSingUp && navigate("/signIn")}
       </div>
     </div>
   );

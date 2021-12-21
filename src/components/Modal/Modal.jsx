@@ -1,42 +1,78 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Modal } from 'react-bootstrap';
 import Profile from "../../assets/images/ProfileLogo.png";
-import ProfileIcon from "../../assets/images/profileIcon.png";
 import editIcon from "../../assets/images/edit-foto-image.png";
+import InstaIcon from "../../assets/images/instagram.png";
+import TeleIcon from "../../assets/images/TeleIcon.png";
+import WhatsAppIcon from "../../assets/images/whatsUpIcon.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import css from "./modal.module.css";
-
-// import { useDispatch, useSelector } from "react-redux";
-// import EditModal from './EditModal';
-
-const user = [
-  {
-    name: "Hamzat",
-    email: "hamzat_intocode@mail.ru",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import {
+  editUserProfile,
+  fetchUserProfile,
+  uploadAvatar,
+} from "../../redux/features/ProfileReducer";
 
 const ModalWindow = ({ name, ...props }) => {
+  const user = useSelector((state) => state.userProfile.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
 
   const [edit, setEdit] = useState(false);
-
-  const handleEdit = () =>  setEdit(true);
-  const handleEditClose = () => setEdit(false)
-
-  // const dispatch = useDispatch();
-  // const user = useSelector(state => state.user);
-
-  /* заготовка для вывода с бэка.  Названия переменных не окончательны,  просто обозначил их. */
-
-  // useEffect(() => {
-  //   dispatch(loadUserInfo)
-  // }, [dispatch]);
-
   const [show, setShow] = useState(false);
+  const [file, setFile] = useState(null);
+
+  const [userNameEditText, setUserNameEditText] = useState("");
+  const [userEmailEditText, setUserEmailEditText] = useState("");
+  const [userSurnameEditText, setUserSurnameEditText] = useState("");
+  const [userWhatsUpEditText, setUserWhatsUpEditText] = useState("");
+  const [userTelegramEditText, setUserTelegramEditText] = useState("");
+  const [userInstagramEditText, setUserInstagramEditText] = useState("");
+  const [userDescriptionEditText, setUserDescriptionEditText] = useState("");
+
+  const handleEdit = () => setEdit(true);
+  const handleEditClose = () => setEdit(false);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleChangeImage = (e) => {
+    setFile(e.target.files[0]);
+    dispatch(uploadAvatar(e.target.files[0]));
+  };
+
+  const handleChangeNameInput = (e) => {
+    setUserNameEditText(e.target.value);
+  };
+
+  const handleChangeEmailInput = (e) => {
+    setUserEmailEditText(e.target.value);
+  };
+
+  const handleChangeSurnameInput = (e) => {
+    setUserSurnameEditText(e.target.value);
+  };
+
+  const handleChangeInstagramInput = (e) => {
+    setUserInstagramEditText(e.target.value);
+  };
+
+  const handleChangeDescriptionInput = (e) => {
+    setUserDescriptionEditText(e.target.value);
+  };
+
+  const handleChangeTelegramInput = (e) => {
+    setUserTelegramEditText(e.target.value);
+  };
+
+  const handleChangeWhatsUpInput = (e) => {
+    setUserWhatsUpEditText(e.target.value);
+  };
 
   return (
     <div>
@@ -50,53 +86,218 @@ const ModalWindow = ({ name, ...props }) => {
         <Offcanvas.Body>
           <div className={css.profileMain}>
             <div className={css.profileImg}>
-              <img src={ProfileIcon} className={css.image}/>
-              <div>
-                <span
-                  onClick={() => handleEdit(true)}
-                  className={css.editButton}
-                >
-                  <img src={editIcon} className={css.editIcon} />
-
-                </span>
+              <img
+                src={`http://localhost:4000/${user.img}`}
+                className={css.image}
+              />
+              <div className={css.editAvatar}>
+                <label className="filebutton">
+                  <span>
+                    <input
+                      className="form-control"
+                      type="file"
+                      id="formFile"
+                      accept="image/*"
+                      onChange={handleChangeImage}
+                      name="img"
+                    />
+                    <img src={editIcon} className={css.editIcon} />
+                  </span>
+                </label>
               </div>
             </div>
           </div>
-          {edit &&
-            <Modal.Dialog>
-              <Modal.Header closeButton>
-                <Modal.Title>Редактирование профиля</Modal.Title>
-              </Modal.Header>
-
-              <Modal.Body>
-                <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>Добавить аватар</Form.Label>
-                  <Form.Control type="file" />
-                </Form.Group>
-                <input placeholder="Your name..."/>
-                <input placeholder="Your e-mail..."/>
-              </Modal.Body>
-
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleEditClose}>Close</Button>
-                <Button variant="primary">Save changes</Button>
-              </Modal.Footer>
-            </Modal.Dialog>}
-
-          {user.map((item) => {
-            return (
-              <div className={css.userInfoBlock}>
-                <p className={css.userInfo}> {item.name} </p>
-                <p className={css.userInfo}> {item.email} </p>
+          {edit ? (
+            <div className={css.editBlockMain}>
+              <div className={css.inputBlock}>
+                <span className={css.editTitle}>Имя:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={!userNameEditText ? user.name : userNameEditText}
+                  onChange={handleChangeNameInput}
+                />
+                <span className={css.editTitle}>Фамилия:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={
+                    !userSurnameEditText ? user.surname : userSurnameEditText
+                  }
+                  onChange={handleChangeSurnameInput}
+                />
+                <span className={css.editTitle}>Е-майл:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={!userEmailEditText ? user.email : userEmailEditText}
+                  onChange={handleChangeEmailInput}
+                />
+                <span className={css.editTitle}>О себе: </span>
+                <textarea
+                  type="text"
+                  className={css.editInput}
+                  value={
+                    !userDescriptionEditText
+                      ? user.description
+                      : userDescriptionEditText
+                  }
+                  onChange={handleChangeDescriptionInput}
+                />
+                <span className={css.editTitle}>Инстаграм:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={
+                    !userInstagramEditText
+                      ? user.instagram
+                      : userInstagramEditText
+                  }
+                  onChange={handleChangeInstagramInput}
+                />
+                <span className={css.editTitle}>Телеграм:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={
+                    !userTelegramEditText ? user.telegram : userTelegramEditText
+                  }
+                  onChange={handleChangeTelegramInput}
+                />
+                <span className={css.editTitle}>Ватсап:</span>
+                <input
+                  type="text"
+                  className={css.editInput}
+                  value={
+                    !userWhatsUpEditText ? user.whatsapp : userWhatsUpEditText
+                  }
+                  onChange={handleChangeWhatsUpInput}
+                />
               </div>
-            );
-          })}
-
+              <div className={css.buttonsBlock}>
+                <Button variant="primary" onClick={handleEditClose}>
+                  Close
+                </Button>{" "}
+                <LoadingButton
+                  name={userNameEditText}
+                  email={userEmailEditText}
+                  surname={userSurnameEditText}
+                  whatsapp={userWhatsUpEditText}
+                  telegram={userTelegramEditText}
+                  instagram={userInstagramEditText}
+                  description={userDescriptionEditText}
+                />
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className={css.userInfoBlock}>
+                <p className={css.userInfo}>
+                  {" "}
+                  <span> Имя: </span> {user.name}
+                </p>
+                <p className={css.userInfo}>
+                  {" "}
+                  <span> Фамилия: </span> {user.surname}
+                </p>
+                <p className={css.userInfo}>
+                  {" "}
+                  <span> E-mail: </span> {user.email}{" "}
+                </p>
+                <p className={css.userInfo}>
+                  {" "}
+                  <span> О себе: </span> {user.description}{" "}
+                </p>
+                <div className={css.socialNetworkIcons}>
+                  {user.instagram ? (
+                    <a href={user.instagram}>
+                      {" "}
+                      <img src={InstaIcon} className={css.socialIcon} />{" "}
+                    </a>
+                  ) : null}
+                  {user.telegram ? (
+                    <a href={user.telegram}>
+                      {" "}
+                      <img src={TeleIcon} className={css.socialIcon} />{" "}
+                    </a>
+                  ) : null}
+                  {user.whatsapp ? (
+                    <a href={user.whatsapp}>
+                      {" "}
+                      <img src={WhatsAppIcon} className={css.socialIcon} />{" "}
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          )}
+          <div className={css.editClick}>
+            <button
+              onClick={() => handleEdit(true)}
+              disabled={edit}
+              className={edit ? css.editButton_dis : css.editButton}
+            >
+              {" "}
+              Редактировать{" "}
+            </button>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
     </div>
   );
 };
+
+function LoadingButton({
+  name,
+  surname,
+  email,
+  description,
+  instagram,
+  telegram,
+  whatsapp,
+}) {
+  const [isLoading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  function simulateNetworkRequest() {
+    return new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+
+  useEffect(() => {
+    if (isLoading) {
+      simulateNetworkRequest().then(() => {
+        setLoading(false);
+      });
+    }
+  }, [isLoading]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(
+      editUserProfile(
+        name,
+        surname,
+        email,
+        description,
+        instagram,
+        telegram,
+        whatsapp
+      )
+    );
+    setLoading(true);
+  };
+
+  return (
+    <Button
+      variant="primary"
+      disabled={isLoading}
+      onClick={!isLoading ? handleClick : null}
+      className={css.loadingBtn}
+    >
+      {isLoading ? "Loading…" : "Edit"}
+    </Button>
+  );
+}
 
 function ShowModal() {
   return (
