@@ -88,7 +88,7 @@ const ModalWindow = ({ name, ...props }) => {
           <div className={css.profileMain}>
             <div className={css.profileImg}>
               <img
-                  src={`http://localhost:4000/${user.img}`}
+                  src={!user.img ? 'http://localhost:4000/uploads/default-photo.png' : `http://localhost:4000/${user.img}`}
                 className={css.image}
               />
               <div className={css.editAvatar}>
