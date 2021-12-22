@@ -1,6 +1,5 @@
 const initialState = {
   user: [],
-  token: null,
   loading: false,
 };
 
@@ -21,9 +20,9 @@ export const profileReducer = (state = initialState, action) => {
       };
     case 'user/profile/edit/fulfilled':
       return {
-        ...state,
-        user: action.payload,
-      };
+        ...state.user,
+        user: action.payload
+      }
     default:
       return state;
   }
