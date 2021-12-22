@@ -75,6 +75,11 @@ const ModalWindow = ({ name, ...props }) => {
     setUserWhatsUpEditText(e.target.value)
   }
 
+  function logout () {
+      localStorage.clear()
+      window.location.href = '/';
+  }
+
   return (
     <div>
       <Button variant="primary" onClick={handleShow} className={css.modalBtn}>
@@ -221,7 +226,9 @@ const ModalWindow = ({ name, ...props }) => {
               Редактировать{" "}
             </button>
             {edit ? (null) : (
-              <button className={css.exitButton}>Выход</button>
+              <button
+                className={css.exitButton}
+                onClick={() => logout()}>Выход</button>
             )}
           </div>
         </Offcanvas.Body>

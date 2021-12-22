@@ -4,6 +4,7 @@ import logoHome from '../../../assets/logo.png';
 import slogan from '../../../assets/slogan.png';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Friends from '../../../assets/images/2047.jpeg';
 import FindPartnerPage from '../FindPartnerPage';
 
 const HomePage = () => {
@@ -40,6 +41,7 @@ const HomePage = () => {
               SIGN UP
             </button>
           </div>
+          <img src={Friends}/>
         </div>
       )}
     </>
