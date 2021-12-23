@@ -1,7 +1,9 @@
 const initialState = {
   signingUp: false,
   successSingUp: false,
-  error: null,
+  errorSignIn: null,
+	errorSignUp: null,
+	errorEmail: null,
   token: localStorage.getItem("token"),
 };
 
@@ -11,26 +13,33 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         signingUp: true,
-        error: null,
+        errorSignUp: null,
       };
     case "auth/signup/fulfilled":
       return {
         ...state,
         signingUp: false,
         successSingUp: true,
+				errorEmail: null
       };
     case "auth/signup/rejected":
       return {
         ...state,
         signingUp: false,
-        error: action.error,
+        errorSignUp: action.error,
         successSingUp: false,
+				errorEmail: null
       };
+		case 'auth/signup/emailRejected':
+			return {
+				...state,
+				errorEmail: false
+			}
     case "auth/signin/pending":
       return {
         ...state,
         signingUp: true,
-        error: null,
+        errorSignIn: null,
       };
     case "auth/signin/fulfilled":
       return {
@@ -42,7 +51,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         signingUp: false,
-        error: action.error,
+        errorSignIn: action.error,
       };
     default:
       return state;
