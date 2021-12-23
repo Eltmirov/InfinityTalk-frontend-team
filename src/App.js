@@ -13,8 +13,8 @@ function App() {
       <Route path='/signUp' element={<SignUpPage />} />
       <Route path='/signIn' element={<SignInPage />} />
       <Route path='/partners' element={<FindPartnerPage />} />
-      <Route path='/websites' element={<WebsitesPage />} />
       <Route path='/message' element={<MessagePage />} />
+      <Route path='/utilities/' element={<WebsitesPage />} />
     </Routes>
   );
 }
