@@ -85,7 +85,7 @@ const Message = () => {
                 <img src="https://xn--e1anu0cb.com/uploads/small-%D0%B7%D0%B0%D0%B3%D0%BB%D1%83%D1%88%D0%BA%D0%B0-ptifxd-1558426986313.png" className='img-locu' alt=""/>
                 <div className='text-of-label'>
                   <span className='partner-name'>{chat.members[0]._id === mainUser._id ? chat.members[1].name : chat.members[0].name}</span> <br/>
-                  <span className='last-msg'>Hey! What is your name?</span>
+                  <span className='last-msg'>{chat.messages.length ? chat.messages[chat.messages.length-1].text.slice(0,10) + '...' : 'Начните чат...'}</span>
                 </div>
 
               </div>)
@@ -98,7 +98,7 @@ const Message = () => {
             <img src="https://botostore.com/netcat_files/22/26/preview_27011_1542527165.jpg" alt=""/> <br/>
             <span>Пожалуйста, выберите чат, чтобы начать общение...</span>
           </div>)
-          :
+          : selectedChat.messages.length ?
           (<div ref={messagesRef} className='messages-container'>
             {
               selectedChat.messages.map((message) => {
@@ -114,7 +114,11 @@ const Message = () => {
             }
 
 
-        </div>)}
+        </div>) : (
+          <div className='no-messages' ref={messagesRef}>
+            <img src="https://cdndelivr.com/stickerset/tvig_vk/2/webp" alt=""/><br/>
+            <span>В этом чате пока нет сообщений.</span>
+          </div>)}
         <div className='input-container'>
           <input disabled={!isAnyChatSelected} type="text" value={messageValue} placeholder='Введите сообщение..' onChange={(ev) => setMessageValue(ev.target.value)}/>
           <button disabled={messageValue === ''} className='btn btn-primary' onClick={onSendMessage}>Send</button>
