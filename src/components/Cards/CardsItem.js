@@ -16,7 +16,8 @@ const CardsItem = ({
   instagram,
   telegram,
   mainUser,
-  id
+  id,
+  rating
 }) => {
 
   const dispatch = useDispatch();
@@ -44,7 +45,8 @@ const CardsItem = ({
           </div>
           <div className="p-3">
             <div  className="text-center">
-              <Rating name="half-rating-read" defaultValue={3.5} precision={0.5} readOnly />
+              <Rating name="size-large" defaultValue={rating} precision={0.5} size="large" />
+
             </div>
             <div className="mt-4 text-center">
               <a href="#">

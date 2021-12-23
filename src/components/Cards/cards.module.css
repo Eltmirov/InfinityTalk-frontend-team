@@ -26,7 +26,7 @@ a:hover{
 }
 .textContent{
   font-family: Rozha One;
-  box-shadow: 0px 0px 8px 4px rgba(179, 183, 186, 0.2);
+  box-shadow: -6px -6px 8px -3px rgba(132, 153, 169, 0.2);
   border-radius: 10px;
   width: 650px;
   display: flex;
