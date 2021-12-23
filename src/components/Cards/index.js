@@ -8,8 +8,8 @@ const Cards = () => {
   const dispatch = useDispatch();
 
   const users = useSelector((state) => state.user.userList);
+  const mainUser = useSelector((state) => state.userProfile.user);
 
-  const authUser = useSelector((state) => state.userProfile.user);
 
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Cards = () => {
   return (
     <div className={styles.main}>
       {users.map((user) => {
-        if (user._id !== authUser._id )
+        if (user._id !== mainUser._id )
         return (
           <CardsItem key={user._id}
                      img={!user.img ? 'http://localhost:4000/uploads/default-photo.png' : `http://localhost:4000/${user.img}`}
@@ -29,7 +29,8 @@ const Cards = () => {
                      whatsapp={user.whatsapp}
                      instagram={user.instagram}
                      telegram={user.telegram}
-
+                     mainUser={mainUser}
+                     id={user._id}
           />
         );
       })}

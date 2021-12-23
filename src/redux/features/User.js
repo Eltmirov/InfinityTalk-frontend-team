@@ -23,7 +23,6 @@ export const loadUsers = () => {
     dispatch({ type: "users/load/pending" });
     const res = await fetch("http://localhost:4000/users");
     const users = await res.json();
-    console.log(users, '----> lorem')
     dispatch({
       type: "users/load/fulfilled",
       payload: users,

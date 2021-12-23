@@ -98,6 +98,7 @@ export const authUser = (login, password) => {
 
     if (json.error) {
       dispatch({ type: "auth/signin/rejected", error: json.error });
+
     } else {
       dispatch({ type: "auth/signin/fulfilled", payload: json });
       localStorage.setItem("token", json.token);
