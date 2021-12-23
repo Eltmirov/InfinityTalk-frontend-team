@@ -5,6 +5,7 @@ body {
 .main {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .main_blur {
@@ -16,7 +17,6 @@ body {
 }
 
 .navbar {
-
   display: flex;
 }
 
@@ -24,10 +24,12 @@ body {
   text-decoration: none;
 }
 
-.findpartner, .websites, .messages {
+.findpartner,
+.websites,
+.messages {
   margin-right: 15px;
   width: 250px;
-  background-color: #E80038;
+  background-color: #e80038;
   border-radius: 8px;
   color: white;
   text-align: center;
@@ -46,8 +48,3 @@ a {
   cursor: pointer;
   background: none;
 }
-
-
-
-
-

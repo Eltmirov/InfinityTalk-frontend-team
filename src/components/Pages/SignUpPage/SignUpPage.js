@@ -133,8 +133,16 @@ const SignUpPage = () => {
         <option value={Arabic}>Arabic</option>
         <option value={Deutsch}>Deutsch</option>
       </select>
-      <div>{errorSignUp && 'Ошибка регистрации!'}</div>
-			<div>{errorEmail === false && "Некорректно введен email"}</div>
+      {errorSignUp && (
+        <div id={styles.error} class='alert alert-danger' role='alert'>
+          Ошибка регистрации!
+        </div>
+      )}
+      {errorEmail === false && (
+        <div id={styles.error} class='alert alert-danger' role='alert'>
+          Некорректно введен email
+        </div>
+      )}
       <div>
         <button
           type='button'
