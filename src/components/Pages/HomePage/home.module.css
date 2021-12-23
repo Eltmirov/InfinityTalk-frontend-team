@@ -5,15 +5,16 @@
 .logo{
   margin-top: 50px;
   width: 1140px;
+  height: 280px;
 }
 
 .slogan{
   width: 600px;
+  height: 60px;
   margin-left: 300px;
 }
 
 .signIn{
-  margin-top: 50px;
   padding: 10px 50px;
   margin-right: 50px;
   font-weight: 700;
@@ -22,10 +23,13 @@
 }
 
 .signUp{
-  margin-top: 50px;
   padding: 10px 50px;
   margin-left: 50px;
   font-weight: 700;
   border: 3px solid;
   border-radius: 50px;
+}
+
+.divan{
+  width: 500px;
 }
