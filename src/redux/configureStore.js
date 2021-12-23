@@ -5,12 +5,14 @@ import { authReducer } from "./features/Auth";
 import { logger } from "redux-logger/src";
 import { userReducer } from "./features/User";
 import { profileReducer } from "./features/ProfileReducer";
+import { chatReducer } from './features/Chat';
 
 export const store = createStore(
   combineReducers({
     auth: authReducer,
     user: userReducer,
     userProfile: profileReducer,
+    chat: chatReducer
   }),
   composeWithDevTools(applyMiddleware(thunk, logger))
 );

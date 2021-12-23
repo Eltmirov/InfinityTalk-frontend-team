@@ -14,6 +14,7 @@ import {
   fetchUserProfile,
   uploadAvatar,
 } from "../../redux/features/ProfileReducer";
+import { loadChats } from '../../redux/features/Chat';
 
 const ModalWindow = ({ name, ...props }) => {
   const user = useSelector((state) => state.userProfile.user);

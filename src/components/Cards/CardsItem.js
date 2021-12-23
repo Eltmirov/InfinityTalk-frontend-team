@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import insta from "../../assets/images/instagram.png";
 import teleg from "../../assets/images/telegram.png";
 import whats from "../../assets/images/whatsapp.png";
+import { startChat } from '../../redux/features/Chat';
+import { useDispatch } from 'react-redux';
 
 const CardsItem = ({
   name,
@@ -12,7 +14,16 @@ const CardsItem = ({
   whatsapp,
   instagram,
   telegram,
+  mainUser,
+  id
 }) => {
+
+  const dispatch = useDispatch();
+
+  const handleSensClick = (partnerId) => {
+    dispatch(startChat(mainUser._id, partnerId))
+  }
+
   return (
     <div className="mb-3">
       <div className="row g-0 justify-content-center">
@@ -21,7 +32,7 @@ const CardsItem = ({
                src={img}
                alt="..."/>
           <div className={styles.Link}>
-            <Link to="/">SEND</Link>
+            <Link to="/message" onClick={() => handleSensClick(id)}>SEND</Link>
           </div>
         </div>
         <div className={`col-md-8 m-2 ${styles.textContent}`}>
