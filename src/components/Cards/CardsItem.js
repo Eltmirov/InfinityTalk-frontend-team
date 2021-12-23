@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import insta from "../../assets/images/instagram.png";
 import teleg from "../../assets/images/telegram.png";
 import whats from "../../assets/images/whatsapp.png";
+import { Rating } from '@mui/material';
 import { startChat } from '../../redux/features/Chat';
 import { useDispatch } from 'react-redux';
 
@@ -34,14 +35,13 @@ const CardsItem = ({
           </div>
         </div>
         <div className={`col-md-8 m-2 ${styles.textContent}`}>
-          <div className="card-body">
+          <div className="card-body w-25">
             <h2 className="card-title fw-bold">{name}</h2>
-            <p className="card-text">{description}</p>
+            <p className="card-text fs-4">{description}</p>
           </div>
           <div className="p-3">
-            <div>
-              <h4>⭐⭐⭐⭐⭐</h4>
-              <span>Rating:<b>5.0</b></span>
+            <div  className="text-center">
+              <Rating name="half-rating-read" defaultValue={3.5} precision={0.5} readOnly />
             </div>
             <div className="mt-4 text-center">
               <a href="#">
