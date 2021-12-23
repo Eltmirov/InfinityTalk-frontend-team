@@ -7,6 +7,7 @@ import { userReducer } from "./features/User";
 import { profileReducer } from "./features/ProfileReducer";
 import { chatReducer } from './features/Chat';
 
+
 export const store = createStore(
   combineReducers({
     auth: authReducer,

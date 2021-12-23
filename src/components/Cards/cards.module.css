@@ -17,19 +17,34 @@ a:hover{
   text-align: center;
   background-color: #E80038;
   transition: 0.2s linear;
+  padding: 2px 0;
+  font-size: 1.25em;
 }
 .Link:hover{
   background-color: #cb0330;
   color: white;
 }
 .textContent{
-  align-items: center;
   font-family: Rozha One;
-  box-shadow: -6px -6px 4px rgba(137, 137, 137, 0.14);
+  box-shadow: 0px 0px 8px 4px rgba(179, 183, 186, 0.2);
   border-radius: 10px;
-  width: 350px;
+  width: 650px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
 .ikon{
-  width: 30px;
-  height: 23px;
+  width: 50px;
 }
+.ikon2{
+  width: 40px;
+}
+.ikon3{
+  width: 44px;
+}
+.imgBlock{
+  width: 200px;
+}
+/*.main {*/
+/*  display: flex;*/
+/*}*/

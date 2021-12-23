@@ -9,10 +9,7 @@ const FindPartner = () => {
   return (
     <>
 			{!token &&(redirect('/'))}
-			<div>
-				Страница "найти собеседника"
 				<Cards/>
-			</div>
 		</>
   );
 };
