@@ -6,7 +6,7 @@ import teleg from "../../assets/images/telegram.png";
 import whats from "../../assets/images/whatsapp.png";
 import { Rating } from '@mui/material';
 import { startChat } from '../../redux/features/Chat';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CardsItem = ({
   name,
@@ -20,9 +20,12 @@ const CardsItem = ({
 }) => {
 
   const dispatch = useDispatch();
+  const chats = useSelector((state) => state.chat.userChats);
 
-  const handleSensClick = (partnerId) => {
-    dispatch(startChat(mainUser._id, partnerId))
+  const handleSendClick = (partnerId) => {
+    if (!chats.some((chat) => chat.members.map((member) => member._id).includes(mainUser._id) && chat.members.map((member) => member._id).includes(partnerId))) {
+      dispatch(startChat(mainUser._id, partnerId))
+    }
   }
 
   return (
@@ -31,7 +34,7 @@ const CardsItem = ({
         <div className={`col-md-2 m-2 text-center ${styles.imgBlock}`}>
           <img className={`rounded-circle ${styles.img}`} src={img} alt="..." />
           <div className={styles.Link}>
-            <Link to="/message" onClick={() => handleSensClick(id)}>SEND</Link>
+            <Link to="/message" onClick={() => handleSendClick(id)}>SEND</Link>
           </div>
         </div>
         <div className={`col-md-8 m-2 ${styles.textContent}`}>
