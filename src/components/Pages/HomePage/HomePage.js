@@ -41,7 +41,7 @@ const HomePage = () => {
               SIGN UP
             </button>
           </div>
-          <img src={Friends}/>
+          <img className={styles.divan} src={Friends}/>
         </div>
       )}
     </>
