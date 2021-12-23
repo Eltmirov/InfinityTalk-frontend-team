@@ -21,11 +21,12 @@ const Cards = () => {
     <div className={styles.main}>
       {users.map((user) => {
         if (user._id !== mainUser._id )
+          if (user.defaultLanguage._id === mainUser.learnLanguage)
         return (
           <CardsItem key={user._id}
                      img={!user.img ? 'http://localhost:4000/uploads/default-photo.png' : `http://localhost:4000/${user.img}`}
                      name={user.name}
-                     description={user.description}
+                     description={!user.description ? `Hey! I speak ${user.defaultLanguage.name} fluently. Help me learn ${user.learnLanguage.name}!` : user.description}
                      whatsapp={user.whatsapp}
                      instagram={user.instagram}
                      telegram={user.telegram}
