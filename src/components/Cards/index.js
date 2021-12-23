@@ -29,6 +29,7 @@ const Cards = () => {
                      whatsapp={user.whatsapp}
                      instagram={user.instagram}
                      telegram={user.telegram}
+
           />
         );
       })}
