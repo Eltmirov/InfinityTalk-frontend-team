@@ -23,6 +23,7 @@ const SignInPage = () => {
 
   const handleAuth = () => {
     dispatch(authUser(login, password));
+
     setLogin('');
     setPassword('');
   };

@@ -1,3 +1,5 @@
+import { loadChats } from './Chat';
+
 const initialState = {
   user: [],
   loading: false,
@@ -39,6 +41,7 @@ export const fetchUserProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: 'users/profile/fetch/fulfilled', payload: data });
+        dispatch(loadChats(data._id))
       });
   };
 };

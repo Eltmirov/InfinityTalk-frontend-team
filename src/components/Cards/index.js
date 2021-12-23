@@ -8,6 +8,7 @@ const Cards = () => {
   const dispatch = useDispatch();
 
   const users = useSelector((state) => state.user.userList);
+  const mainUser = useSelector((state) => state.userProfile.user);
 
   const authUser = useSelector((state) => state.userProfile.user);
 
@@ -29,6 +30,8 @@ const Cards = () => {
                      whatsapp={user.whatsapp}
                      instagram={user.instagram}
                      telegram={user.telegram}
+                     mainUser={mainUser}
+                     id={user._id}
           />
         );
       })}
