@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUtilities } from "./../../redux/features/UtilitiesReducer";
 import UtilitiesItem from "./UtilitiesItem";
 import cl from "./index.css";
+import Game from '../Game/Game';
 
 const Utilities = () => {
   const dispatch = useDispatch();
@@ -39,13 +40,11 @@ const Utilities = () => {
       <div className="d-flex justify-content-center ">
         <Buttons handleChangeLang={handleChangeLang} />
       </div>
-
       <div className="d-flex flex-wrap justify-content-center text-center mt-5">
         {utilities &&
           filteredUtilities.map((utility) => {
             return (
               <UtilitiesItem
-
                 key={utility._id}
                 utilityImage={utility.utilityImage}
                 utilityTitle={utility.utilityTitle}
@@ -55,6 +54,7 @@ const Utilities = () => {
             );
           })}
       </div>
+      <Game />
     </div>
   );
 };

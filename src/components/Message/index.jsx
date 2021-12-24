@@ -22,12 +22,19 @@ const Message = () => {
     //   roomId: selectedChat._id,
     //   text: messageValue,
     // });
-    dispatch(newMessage(selectedChat._id, user, messageValue))
+    dispatch(newMessage(selectedChat._id, user, messageValue.trim()))
     // dispatch({
     //   type: 'NEW_MESSAGE',
     //   payload: { chatId: selectedChat._id, user, text: messageValue },
     // });
     setMessageValue('');
+  };
+
+  const onKeySendMessage = (e) => {
+    if (messageValue.trim() !== '' && e.key === 'Enter') {
+      dispatch(newMessage(selectedChat._id, user, messageValue.trim()))
+      setMessageValue('');
+    }
   };
 
   const addMessage = (message) => {
@@ -82,7 +89,7 @@ const Message = () => {
           filteredChats.map((chat) => {
             return (
               <div className={`chats-item ${chat.selected ? 'selected-chat' : ''}`} onClick={() => handleChatItemClick(chat._id)}>
-                <img src="https://xn--e1anu0cb.com/uploads/small-%D0%B7%D0%B0%D0%B3%D0%BB%D1%83%D1%88%D0%BA%D0%B0-ptifxd-1558426986313.png" className='img-locu' alt=""/>
+                <img src={chat.members[0]._id === mainUser._id ? (chat.members[1].img ? `http://localhost:4000/${chat.members[1].img}` : "http://localhost:4000/uploads/default-photo.png") : (chat.members[0].img ? `http://localhost:4000/${chat.members[0].img}` : "http://localhost:4000/uploads/default-photo.png")} className='img-locu' alt=""/>
                 <div className='text-of-label'>
                   <span className='partner-name'>{chat.members[0]._id === mainUser._id ? chat.members[1].name : chat.members[0].name}</span> <br/>
                   <span className='last-msg'>{chat.messages.length ? chat.messages[chat.messages.length-1].text.slice(0,10) + '...' : 'Начните чат...'}</span>
@@ -120,8 +127,8 @@ const Message = () => {
             <span>В этом чате пока нет сообщений.</span>
           </div>)}
         <div className='input-container'>
-          <input disabled={!isAnyChatSelected} type="text" value={messageValue} placeholder='Введите сообщение..' onChange={(ev) => setMessageValue(ev.target.value)}/>
-          <button disabled={messageValue === ''} className='btn btn-primary' onClick={onSendMessage}>Send</button>
+          <input disabled={!isAnyChatSelected} onKeyPress={onKeySendMessage} type="text" value={messageValue} placeholder='Введите сообщение..' onChange={(ev) => setMessageValue(ev.target.value)}/>
+          <button disabled={messageValue.trim() === ''} className='btn btn-primary' onClick={onSendMessage}>Send</button>
         </div>
       </div>
     </div>
