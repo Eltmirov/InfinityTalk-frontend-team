@@ -1,30 +1,35 @@
-.img{
+.img {
   width: 150px;
   border: 2px solid grey;
   text-align: center;
 }
-a{
+a {
   color: white;
   margin: 10px;
   text-decoration-line: none;
 }
-a:hover{
+a:hover {
   color: white;
 }
-.Link{
+.Link {
   border-radius: 5px;
   margin-top: 15px;
   text-align: center;
-  background-color: #E80038;
+  background-color: #e80038;
   transition: 0.2s linear;
   padding: 2px 0;
   font-size: 1.25em;
 }
-.Link:hover{
+.Link:hover {
   background-color: #cb0330;
   color: white;
 }
-.textContent{
+.Link a {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+.textContent {
   font-family: Rozha One;
   box-shadow: -6px -6px 8px -3px rgba(132, 153, 169, 0.2);
   border-radius: 10px;
@@ -33,16 +38,16 @@ a:hover{
   justify-content: space-between;
   padding-bottom: 10px;
 }
-.ikon{
+.ikon {
   width: 50px;
 }
-.ikon2{
+.ikon2 {
   width: 40px;
 }
-.ikon3{
+.ikon3 {
   width: 44px;
 }
-.imgBlock{
+.imgBlock {
   width: 200px;
 }
 /*.main {*/
