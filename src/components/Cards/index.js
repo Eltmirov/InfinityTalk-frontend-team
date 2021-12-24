@@ -17,8 +17,8 @@ const Cards = () => {
   return (
     <div className={styles.main}>
       {users.map((user) => {
-        // if (user._id !== mainUser._id)
-        //   if (user.defaultLanguage._id === mainUser.learnLanguage)
+           if (user._id !== mainUser._id)
+           if (user.defaultLanguage._id === mainUser.learnLanguage)
             return (
               <CardsItem
                 key={user._id}
