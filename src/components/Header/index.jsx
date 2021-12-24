@@ -13,7 +13,7 @@ const Header = () => {
         <NavLink to='/'> <img src={logo}/> </NavLink>
       </div>
       <div className={css.navbar}>
-          <NavLink to='/websites' className={css.websites}> WEBSITES & APPS  </NavLink>
+          <NavLink to='/utilities' className={css.websites}> WEBSITES & APPS  </NavLink>
           <NavLink to='/partners' className={css.findpartner}> FIND A PARTNER  </NavLink>
           <NavLink to='/message' className={css.messages}> MESSAGES  </NavLink>
       </div>

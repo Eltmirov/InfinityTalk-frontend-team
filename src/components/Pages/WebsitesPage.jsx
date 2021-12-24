@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../Header';
-import Websites from '../Websites&Apps';
+import WebsitesApps from '../WebsitesApps';
 
 const WebsitesPage = () => {
   return (
     <div>
       <Header/>
-      <Websites/>
+      <WebsitesApps/>
     </div>
   );
 };

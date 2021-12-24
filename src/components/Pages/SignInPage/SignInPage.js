@@ -8,8 +8,8 @@ import { authUser } from '../../../redux/features/Auth';
 const SignInPage = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-	const token = useSelector(state => state.auth.token)
-	const errorSignIn = useSelector(state => state.auth.errorSignIn)
+  const token = useSelector((state) => state.auth.token);
+  const errorSignIn = useSelector((state) => state.auth.errorSignIn);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +32,7 @@ const SignInPage = () => {
   return (
     <div className={styles.main}>
       <div>
-        <img className={styles.miniLogo} src={miniLogo}/>
+        <img className={styles.miniLogo} src={miniLogo} />
       </div>
       <h3>SIGN IN</h3>
       <input
@@ -50,7 +50,11 @@ const SignInPage = () => {
         onChange={handleChangePassword}
       />
       <div>
-			<div>{errorSignIn && 'Ошибка авторизации!'}</div>
+        {errorSignIn && (
+          <div id={styles.error} class='alert alert-danger' role='alert'>
+            Ошибка авторизации!
+          </div>
+        )}
         <button
           type='button'
           className={`btn btn-outline-danger ${styles.signIn}`}
@@ -58,7 +62,7 @@ const SignInPage = () => {
         >
           SIGN IN
         </button>
-				{token &&(navigate('/'))}
+        {token && navigate('/')}
       </div>
     </div>
   );

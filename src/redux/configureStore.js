@@ -6,6 +6,7 @@ import { logger } from "redux-logger/src";
 import { userReducer } from "./features/User";
 import { profileReducer } from "./features/ProfileReducer";
 import { chatReducer } from './features/Chat';
+import { utilitiesReducer } from './features/UtilitiesReducer'
 
 
 export const store = createStore(
@@ -13,7 +14,8 @@ export const store = createStore(
     auth: authReducer,
     user: userReducer,
     userProfile: profileReducer,
-    chat: chatReducer
+    chat: chatReducer,
+    utilities: utilitiesReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk, logger))
 );
