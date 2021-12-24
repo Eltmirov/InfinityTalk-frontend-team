@@ -49,17 +49,14 @@ const CardsItem = ({
 
             </div>
             <div className="mt-4 text-center">
-              <a href="#">
+              <a href={instagram}>
                 <img src={insta} className={styles.ikon} alt="..." />
-                {instagram}
               </a>
-              <a href="#">
+              <a href={whatsapp}>
                 <img src={whats} className={styles.ikon2} alt="..." />
-                {whatsapp}
               </a>
-              <a href="#">
+              <a href={telegram}>
                 <img src={teleg} className={styles.ikon3} alt="..." />
-                {telegram}
               </a>
             </div>
           </div>
